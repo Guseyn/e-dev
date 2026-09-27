@@ -1,0 +1,1028 @@
+{
+  "library": "ehtml",
+  "title": "EHTML",
+  "docs": "https://e-html.org/html/documentation.html",
+  "groups": {
+    "request": [
+      {
+        "name": "data-request-headers",
+        "type": "expression",
+        "placeholder": "${{ authorization: `Bearer ${localStorage.getItem('token')}` }}",
+        "description": "Headers of the request, as an object expression"
+      }
+    ],
+    "progress": [
+      {
+        "name": "data-actions-on-progress-start",
+        "type": "actions",
+        "description": "Actions before the request starts"
+      },
+      {
+        "name": "data-actions-on-progress-end",
+        "type": "actions",
+        "description": "Actions after the request ends"
+      }
+    ],
+    "indicators": [
+      {
+        "name": "data-ajax-icon",
+        "type": "selector",
+        "description": "Selector of an element shown while the request is in progress"
+      },
+      {
+        "name": "data-progress-bar",
+        "type": "selector",
+        "description": "Selector of a <progress> for download progress"
+      }
+    ]
+  },
+  "elements": [
+    {
+      "id": "e-json",
+      "name": "e-json",
+      "tag": "e-json",
+      "icon": "data_object",
+      "category": "data",
+      "invisible": true,
+      "description": "Fetches JSON from an endpoint and runs actions on response, usually mapToTemplate(). Disappears from the DOM after response (unless data-reusable).",
+      "source": "web-app/static/js/ehtml/E/e-json.js",
+      "docs": "https://e-html.org/html/attributes.html#e-json",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-src",
+          "type": "endpoint-get",
+          "required": false,
+          "description": "GET endpoint to fetch JSON from (not needed with data-socket, data-event-source or data-cache-from)",
+          "primary": true
+        },
+        {
+          "name": "data-response-name",
+          "type": "name",
+          "required": true,
+          "default": "response",
+          "description": "Name of the response object in actions ({ body, statusCode, headers })"
+        },
+        {
+          "name": "data-actions-on-response",
+          "type": "actions",
+          "required": true,
+          "default": "\nmapToTemplate(`template[data-object-name='item']`, response.body)\n",
+          "description": "Actions to run with the response"
+        },
+        {
+          "name": "data-reusable",
+          "type": "boolean",
+          "description": "Keep element in DOM after response (needed for session cache and repeated trigger())"
+        },
+        {
+          "name": "data-use-session-cache",
+          "type": "boolean",
+          "description": "Cache response in sessionStorage (needs data-reusable or data-only-update-session-cache-on-visibility-change)"
+        },
+        {
+          "name": "data-only-update-session-cache-on-visibility-change",
+          "type": "boolean",
+          "description": "Refresh cached response only when tab becomes visible"
+        },
+        {
+          "name": "data-do-not-run-on-activation",
+          "type": "boolean",
+          "description": "Don't fetch automatically, only on .trigger()"
+        },
+        {
+          "name": "data-socket",
+          "type": "string",
+          "description": "WebSocket name to receive JSON from (instead of data-src)"
+        },
+        {
+          "name": "data-event-source",
+          "type": "string",
+          "description": "EventSource name to receive JSON from"
+        },
+        {
+          "name": "data-event",
+          "type": "string",
+          "description": "SSE event name; if absent, listens to plain message events"
+        },
+        {
+          "name": "data-cache-from",
+          "type": "expression",
+          "description": "Expression returning a cached response; if null, the request is made",
+          "placeholder": "${getObjectFromSessionStorage('cache')}"
+        }
+      ],
+      "groups": [
+        "request",
+        "progress",
+        "indicators"
+      ],
+      "innerHTML": "<template data-object-name=\"item\">\n  <span data-text=\"${item}\"></span>\n</template>",
+      "suggestedChildren": [
+        "template-object",
+        "e-for-each",
+        "e-if",
+        "e-reusable"
+      ]
+    },
+    {
+      "id": "e-html",
+      "name": "e-html",
+      "tag": "e-html",
+      "icon": "html",
+      "category": "data",
+      "invisible": true,
+      "description": "Loads an html file and puts its content in place of the element.",
+      "source": "web-app/static/js/ehtml/E/e-html.js",
+      "docs": "https://e-html.org/html/attributes.html#e-html",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "data-src",
+          "type": "html-page",
+          "required": true,
+          "description": "Html file to load, like /html/parts/footer.html"
+        }
+      ],
+      "groups": [
+        "request",
+        "progress"
+      ]
+    },
+    {
+      "id": "e-markdown",
+      "name": "e-markdown",
+      "tag": "e-markdown",
+      "icon": "description",
+      "category": "data",
+      "invisible": true,
+      "description": "Loads a markdown file and renders it as html (with code highlight and KaTeX).",
+      "source": "web-app/static/js/ehtml/E/e-markdown.js",
+      "docs": "https://e-html.org/html/attributes.html#e-markdown",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "data-src",
+          "type": "url",
+          "required": false,
+          "placeholder": "/md/intro.md",
+          "description": "Markdown file to load",
+          "primary": true
+        },
+        {
+          "name": "data-internal-state",
+          "type": "expression",
+          "placeholder": "${{ markdown: '# Hi' }}",
+          "description": "Object { markdown, extensions }; with markdown no request is made"
+        }
+      ],
+      "groups": [
+        "request",
+        "progress"
+      ]
+    },
+    {
+      "id": "e-svg",
+      "name": "e-svg",
+      "tag": "e-svg",
+      "icon": "shapes",
+      "category": "data",
+      "invisible": true,
+      "description": "Loads an svg file inline, so it can be styled with CSS.",
+      "source": "web-app/static/js/ehtml/E/e-svg.js",
+      "docs": "https://e-html.org/html/attributes.html#e-svg",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "data-src",
+          "type": "url",
+          "required": true,
+          "placeholder": "/images/icon.svg",
+          "description": "Svg file to load"
+        }
+      ],
+      "groups": [
+        "request",
+        "progress"
+      ]
+    },
+    {
+      "id": "e-json-view",
+      "name": "e-json-view",
+      "tag": "e-json-view",
+      "icon": "data_array",
+      "category": "data",
+      "invisible": false,
+      "description": "Fetches JSON and shows it formatted, useful for debugging endpoints.",
+      "source": "web-app/static/js/ehtml/E/e-json-view.js",
+      "docs": "https://e-html.org/html/attributes.html#e-json-view",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "data-src",
+          "type": "endpoint-get",
+          "required": true,
+          "description": "GET endpoint to fetch JSON from"
+        }
+      ],
+      "groups": [
+        "request",
+        "progress"
+      ]
+    },
+    {
+      "id": "e-form",
+      "name": "e-form",
+      "tag": "form",
+      "is": "e-form",
+      "icon": "dynamic_form",
+      "category": "form",
+      "description": "Form that sends its fields as JSON. The button with data-request-url submits it and runs actions on response.",
+      "source": "web-app/static/js/ehtml/E/e-form.js",
+      "docs": "https://e-html.org/html/attributes.html#form-ise-form",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-request-url",
+          "type": "endpoint-any",
+          "description": "Endpoint to send the form to right after it appears (usually it's on the submit button instead)"
+        },
+        {
+          "name": "data-request-method",
+          "type": "enum",
+          "values": [
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "GET"
+          ],
+          "description": "Method of the request (POST by default)"
+        },
+        {
+          "name": "data-response-name",
+          "type": "name",
+          "description": "Name of the response object in actions"
+        },
+        {
+          "name": "data-actions-on-response",
+          "type": "actions",
+          "description": "Actions to run with the response"
+        },
+        {
+          "name": "data-do-not-trigger-on-enter",
+          "type": "boolean",
+          "description": "Don't submit when Enter is pressed in a field"
+        },
+        {
+          "name": "data-socket",
+          "type": "string",
+          "description": "Send form as a message to this WebSocket instead"
+        },
+        {
+          "name": "data-actions-on-progress",
+          "type": "actions",
+          "description": "Actions run right before the request is sent"
+        },
+        {
+          "name": "data-progress-bar",
+          "type": "selector",
+          "description": "Selector of a <progress> for download progress"
+        },
+        {
+          "name": "data-upload-progress-bar",
+          "type": "selector",
+          "description": "Selector of a <progress> for upload progress"
+        },
+        {
+          "name": "data-ajax-icon",
+          "type": "selector",
+          "description": "Element shown while the request is in progress"
+        },
+        {
+          "name": "data-button-ajax-text",
+          "type": "string",
+          "description": "Text of the button while the request is in progress"
+        },
+        {
+          "name": "data-button-ajax-class",
+          "type": "string",
+          "description": "Class of the button while the request is in progress"
+        },
+        {
+          "name": "data-download-response-body-as-file-with-name",
+          "type": "string",
+          "description": "Download response as a file with this name"
+        },
+        {
+          "name": "data-validation-error-message",
+          "type": "string",
+          "description": "Default validation error message for fields"
+        },
+        {
+          "name": "data-validation-error-class-for-element",
+          "type": "string",
+          "description": "Class added to fields with errors"
+        },
+        {
+          "name": "data-validation-error-class-for-message-box",
+          "type": "string",
+          "description": "Class of error message boxes"
+        }
+      ],
+      "groups": [
+        "request"
+      ],
+      "innerHTML": "<input type=\"text\" name=\"name\" placeholder=\"Name\">\n<button\n  data-primary\n  onclick=\"this.form.submit(this)\"\n  data-request-url=\"/\"\n  data-request-method=\"POST\"\n  data-response-name=\"response\"\n  data-actions-on-response=\"\n    console.log(response)\n  \">Submit</button>",
+      "suggestedChildren": [
+        "input",
+        "textarea",
+        "e-select",
+        "select",
+        "button-submit",
+        "label",
+        "e-form-array",
+        "e-form-object",
+        "e-form-dynamic-value",
+        "e-local-storage-value",
+        "e-session-storage-value",
+        "e-date",
+        "e-time",
+        "e-file-upload",
+        "e-multiselect-dropdown"
+      ]
+    },
+    {
+      "id": "button-submit",
+      "name": "Submit button (e-form)",
+      "tag": "button",
+      "icon": "send",
+      "category": "form",
+      "description": "Button that submits the closest e-form (onclick=\"this.form.submit(this)\") to an endpoint and runs actions on response.",
+      "source": "web-app/static/js/ehtml/E/e-form.js",
+      "docs": "https://e-html.org/html/attributes.html#form-level-attributes",
+      "content": "text",
+      "defaultText": "Submit",
+      "parents": [
+        "e-form"
+      ],
+      "presetAttributes": [
+        [
+          "data-primary",
+          null
+        ],
+        [
+          "onclick",
+          "this.form.submit(this)"
+        ]
+      ],
+      "attributes": [
+        {
+          "name": "data-request-url",
+          "type": "endpoint-any",
+          "required": true,
+          "description": "Endpoint to send the form to (not needed with data-socket)"
+        },
+        {
+          "name": "data-request-method",
+          "type": "enum",
+          "values": [
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "GET"
+          ],
+          "default": "POST",
+          "description": "Method of the request"
+        },
+        {
+          "name": "data-response-name",
+          "type": "name",
+          "required": true,
+          "default": "response",
+          "description": "Name of the response object in actions"
+        },
+        {
+          "name": "data-actions-on-response",
+          "type": "actions",
+          "required": true,
+          "default": "\nif (response.statusCode === 200) {\n  console.log(response.body)\n}\n",
+          "description": "Actions to run with the response"
+        },
+        {
+          "name": "data-actions-on-progress",
+          "type": "actions",
+          "description": "Actions run right before the request is sent"
+        },
+        {
+          "name": "data-button-ajax-text",
+          "type": "string",
+          "placeholder": "Saving...",
+          "description": "Text of the button while the request is in progress"
+        },
+        {
+          "name": "data-button-ajax-class",
+          "type": "string",
+          "description": "Class of the button while the request is in progress"
+        },
+        {
+          "name": "data-upload-progress-bar",
+          "type": "selector",
+          "description": "Selector of a <progress> for upload progress"
+        },
+        {
+          "name": "data-download-response-body-as-file-with-name",
+          "type": "string",
+          "description": "Download response as a file with this name"
+        },
+        {
+          "name": "data-socket",
+          "type": "string",
+          "description": "Send the form as a message to this WebSocket instead"
+        }
+      ],
+      "groups": [
+        "request",
+        "indicators"
+      ]
+    },
+    {
+      "id": "e-form-array",
+      "name": "e-form-array",
+      "tag": "e-form-array",
+      "icon": "data_array",
+      "category": "form",
+      "description": "Groups fields of an e-form into an array in the request body.",
+      "source": "web-app/static/js/ehtml/E/e-form-array.js",
+      "docs": "https://e-html.org/html/attributes.html#e-form-array",
+      "content": "children",
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array"
+      ],
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Name of the array in the request body"
+        }
+      ],
+      "suggestedChildren": [
+        "e-form-object",
+        "input"
+      ]
+    },
+    {
+      "id": "e-form-object",
+      "name": "e-form-object",
+      "tag": "e-form-object",
+      "icon": "data_object",
+      "category": "form",
+      "description": "Groups fields of an e-form into an object in the request body.",
+      "source": "web-app/static/js/ehtml/E/e-form-object.js",
+      "docs": "https://e-html.org/html/attributes.html#e-form-object",
+      "content": "children",
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array"
+      ],
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Name of the object in the request body (not needed inside e-form-array)"
+        }
+      ],
+      "suggestedChildren": [
+        "input",
+        "textarea",
+        "select",
+        "e-form-array"
+      ]
+    },
+    {
+      "id": "e-form-dynamic-value",
+      "name": "e-form-dynamic-value",
+      "tag": "e-form-dynamic-value",
+      "icon": "function",
+      "category": "form",
+      "description": "Adds a computed value to the request body of an e-form.",
+      "source": "web-app/static/js/ehtml/E/e-form-dynamic-value.js",
+      "docs": "https://e-html.org/html/attributes.html#e-form-dynamic-value",
+      "content": "none",
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array"
+      ],
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Name in the request body"
+        },
+        {
+          "name": "data-bound-to",
+          "type": "expression",
+          "required": true,
+          "placeholder": "${new Date().toISOString()}",
+          "description": "Expression of the value"
+        },
+        {
+          "name": "data-is-query-param",
+          "type": "boolean",
+          "description": "Send as a query param instead of body"
+        }
+      ]
+    },
+    {
+      "id": "e-local-storage-value",
+      "name": "e-local-storage-value",
+      "tag": "e-local-storage-value",
+      "icon": "storage",
+      "category": "form",
+      "description": "Adds a value from localStorage to the request body of an e-form.",
+      "source": "web-app/static/js/ehtml/E/e-local-storage-value.js",
+      "docs": "https://e-html.org/html/attributes.html#e-local-storage-value",
+      "content": "none",
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array"
+      ],
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Name in the request body"
+        },
+        {
+          "name": "data-key",
+          "type": "string",
+          "required": true,
+          "description": "Key in localStorage (supports ${…})"
+        },
+        {
+          "name": "data-is-query-param",
+          "type": "boolean",
+          "description": "Send as a query param instead of body"
+        }
+      ]
+    },
+    {
+      "id": "e-session-storage-value",
+      "name": "e-session-storage-value",
+      "tag": "e-session-storage-value",
+      "icon": "hourglass_empty",
+      "category": "form",
+      "description": "Adds a value from sessionStorage to the request body of an e-form.",
+      "source": "web-app/static/js/ehtml/E/e-session-storage-value.js",
+      "docs": "https://e-html.org/html/attributes.html#e-session-storage-value",
+      "content": "none",
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array"
+      ],
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Name in the request body"
+        },
+        {
+          "name": "data-key",
+          "type": "string",
+          "required": true,
+          "description": "Key in sessionStorage (supports ${…})"
+        },
+        {
+          "name": "data-is-query-param",
+          "type": "boolean",
+          "description": "Send as a query param instead of body"
+        }
+      ]
+    },
+    {
+      "id": "e-select",
+      "name": "e-select",
+      "tag": "select",
+      "is": "e-select",
+      "icon": "arrow_drop_down_circle",
+      "category": "form",
+      "description": "Select that gets its selected option from data-value (can be an expression).",
+      "source": "web-app/static/js/ehtml/E/e-select.js",
+      "docs": "https://e-html.org/html/attributes.html#select-ise-select",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Name in the request body"
+        },
+        {
+          "name": "data-value",
+          "type": "string",
+          "description": "Value of the option to select (supports ${…})"
+        }
+      ],
+      "innerHTML": "<option value=\"one\">One</option>\n<option value=\"two\">Two</option>",
+      "suggestedChildren": [
+        "option"
+      ]
+    },
+    {
+      "id": "e-wrapper",
+      "name": "e-wrapper",
+      "tag": "template",
+      "is": "e-wrapper",
+      "icon": "web",
+      "category": "template",
+      "invisible": true,
+      "description": "Loads a layout html file and places its content before, after, inside, or instead of the element matched by data-where-to-place.",
+      "source": "web-app/static/js/ehtml/E/e-wrapper-template.js",
+      "docs": "https://e-html.org/html/attributes.html#template-ise-wrapper",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-src",
+          "type": "template-page",
+          "required": true,
+          "description": "Template file (created with \"Add New Template\")"
+        },
+        {
+          "name": "data-where-to-place",
+          "type": "selector",
+          "required": true,
+          "default": "#content",
+          "description": "Element in the template to place the content to"
+        },
+        {
+          "name": "data-how-to-place",
+          "type": "enum",
+          "required": false,
+          "values": [
+            "inside",
+            "instead",
+            "before",
+            "after"
+          ],
+          "default": "inside",
+          "description": "How to place the content (\"instead\" of the element by default)"
+        }
+      ],
+      "groups": [
+        "request",
+        "progress"
+      ],
+      "suggestedChildren": [
+        "e-html",
+        "section",
+        "e-json"
+      ]
+    },
+    {
+      "id": "e-if",
+      "name": "e-if",
+      "tag": "template",
+      "is": "e-if",
+      "icon": "alt_route",
+      "category": "template",
+      "invisible": true,
+      "description": "Shows its content only if the condition is true.",
+      "source": "web-app/static/js/ehtml/E/e-if-template.js",
+      "docs": "https://e-html.org/html/attributes.html#template-ise-if",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-condition-to-display",
+          "type": "expression",
+          "required": true,
+          "placeholder": "${user.isAdmin}",
+          "description": "Condition expression"
+        }
+      ],
+      "innerHTML": "<p is=\"e-p\">Shown when the condition is true</p>"
+    },
+    {
+      "id": "e-for-each",
+      "name": "e-for-each",
+      "tag": "template",
+      "is": "e-for-each",
+      "icon": "repeat",
+      "category": "template",
+      "invisible": true,
+      "description": "Repeats its content for each item of a list.",
+      "source": "web-app/static/js/ehtml/E/e-for-each-template.js",
+      "docs": "https://e-html.org/html/attributes.html#template-ise-for-each",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-list-to-iterate",
+          "type": "expression",
+          "required": true,
+          "placeholder": "${response.body.items}",
+          "description": "List expression"
+        },
+        {
+          "name": "data-item-name",
+          "type": "name",
+          "required": true,
+          "default": "item",
+          "description": "Name of the current item"
+        },
+        {
+          "name": "data-index-name",
+          "type": "name",
+          "description": "Name of the 1-based index variable (default index)",
+          "default": "index"
+        }
+      ],
+      "innerHTML": "<div data-text=\"${item}\"></div>"
+    },
+    {
+      "id": "e-reusable",
+      "name": "e-reusable",
+      "tag": "template",
+      "is": "e-reusable",
+      "icon": "recycling",
+      "category": "template",
+      "invisible": true,
+      "description": "Template that stays in the DOM; each mapToTemplate() inserts its content again (before the template, or where the placement attributes say).",
+      "source": "web-app/static/js/ehtml/E/e-reusable-template.js",
+      "docs": "https://e-html.org/html/attributes.html#template-ise-reusable",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-object-name",
+          "type": "name",
+          "required": true,
+          "default": "item",
+          "description": "Name of the mapped object inside the template"
+        },
+        {
+          "name": "data-release-on-load",
+          "type": "enum",
+          "description": "Insert content right away (only the value \"true\" works)",
+          "values": [
+            "true"
+          ]
+        },
+        {
+          "name": "data-append-to",
+          "type": "selector",
+          "description": "Insert content at the end of this element"
+        },
+        {
+          "name": "data-prepend-to",
+          "type": "selector",
+          "description": "Insert content at the start of this element"
+        },
+        {
+          "name": "data-insert-into",
+          "type": "selector",
+          "description": "Replace content of this element"
+        },
+        {
+          "name": "data-place-instead",
+          "type": "selector",
+          "description": "Replace this element with the content"
+        }
+      ],
+      "innerHTML": "<div data-text=\"${item}\"></div>"
+    },
+    {
+      "id": "template-object",
+      "name": "template (data-object-name)",
+      "tag": "template",
+      "icon": "code_blocks",
+      "category": "template",
+      "invisible": true,
+      "description": "Plain template released by mapToTemplate(selector, object) or releaseTemplate(selector). Inserted before the template unless a placement attribute is set; removed after release.",
+      "source": "web-app/static/js/ehtml/templateTriggerEventListener.js",
+      "docs": "https://e-html.org/html/attributes.html#native-template",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-object-name",
+          "type": "name",
+          "required": true,
+          "default": "item",
+          "description": "Name of the mapped object inside the template"
+        },
+        {
+          "name": "data-release-on-load",
+          "type": "boolean",
+          "description": "Release right away (needs data-object-name; data-internal-state is the object)"
+        },
+        {
+          "name": "data-internal-state",
+          "type": "expression",
+          "description": "Object used on release on load"
+        },
+        {
+          "name": "data-append-to",
+          "type": "selector",
+          "description": "Insert content at the end of this element"
+        },
+        {
+          "name": "data-prepend-to",
+          "type": "selector",
+          "description": "Insert content at the start of this element"
+        },
+        {
+          "name": "data-insert-into",
+          "type": "selector",
+          "description": "Replace content of this element"
+        },
+        {
+          "name": "data-place-instead",
+          "type": "selector",
+          "description": "Replace this element with the content"
+        }
+      ],
+      "innerHTML": "<div data-text=\"${item.title}\"></div>"
+    },
+    {
+      "id": "e-json-map",
+      "name": "e-json-map",
+      "tag": "template",
+      "is": "e-json-map",
+      "icon": "account_tree",
+      "category": "template",
+      "invisible": true,
+      "description": "Fetches JSON and maps it to its content right away, without actions.",
+      "source": "web-app/static/js/ehtml/E/e-json-map-template.js",
+      "docs": "https://e-html.org/html/attributes.html#template-ise-json-map",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-object-name",
+          "type": "name",
+          "required": true,
+          "default": "res",
+          "description": "Name of the response ({ body, statusCode, headers }) inside the template"
+        },
+        {
+          "name": "data-src",
+          "type": "endpoint-get",
+          "required": true,
+          "description": "GET endpoint to fetch JSON from"
+        },
+        {
+          "name": "data-socket",
+          "type": "string",
+          "description": "WebSocket name to receive JSON from"
+        },
+        {
+          "name": "data-prepend-to",
+          "type": "selector",
+          "description": "Where to put the content instead of before the template"
+        },
+        {
+          "name": "data-append-to",
+          "type": "selector",
+          "description": "Where to put the content instead of before the template"
+        },
+        {
+          "name": "data-insert-into",
+          "type": "selector",
+          "description": "Where to put the content instead of before the template"
+        },
+        {
+          "name": "data-place-instead",
+          "type": "selector",
+          "description": "Where to put the content instead of before the template"
+        }
+      ],
+      "groups": [
+        "request",
+        "progress",
+        "indicators"
+      ],
+      "innerHTML": "<div data-text=\"${res.body.title}\"></div>"
+    },
+    {
+      "id": "e-page-with-url",
+      "name": "e-page-with-url",
+      "tag": "template",
+      "is": "e-page-with-url",
+      "icon": "link",
+      "category": "template",
+      "invisible": true,
+      "description": "Makes url params and queries (by pattern) available inside as urlParams. Put it at the start of <body>; everything using urlParams must be inside it.",
+      "source": "web-app/static/js/ehtml/E/e-page-with-url-template.js",
+      "docs": "https://e-html.org/html/attributes.html#template-ise-page-with-url",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-url-pattern",
+          "type": "string",
+          "required": true,
+          "placeholder": "/html/post.html?{id}",
+          "description": "Url pattern with {params}"
+        }
+      ],
+      "innerHTML": "<span data-text=\"${urlParams.id}\"></span>"
+    },
+    {
+      "id": "e-ws",
+      "name": "e-ws",
+      "tag": "template",
+      "is": "e-ws",
+      "icon": "sync_alt",
+      "category": "data",
+      "invisible": true,
+      "description": "Opens a named WebSocket connection, used by e-json/e-form with data-socket.",
+      "source": "web-app/static/js/ehtml/E/e-ws-template.js",
+      "docs": "https://e-html.org/html/attributes.html#template-ise-ws",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-src",
+          "type": "url",
+          "required": true,
+          "placeholder": "wss://localhost:4200/ws",
+          "description": "WebSocket url"
+        },
+        {
+          "name": "data-socket-name",
+          "type": "name",
+          "required": true,
+          "description": "Name of the connection"
+        },
+        {
+          "name": "data-actions-on-open-connection",
+          "type": "actions",
+          "description": "Actions when connection opens"
+        },
+        {
+          "name": "data-actions-on-close-connection",
+          "type": "actions",
+          "description": "Actions when connection closes"
+        },
+        {
+          "name": "data-connection-icon",
+          "type": "selector",
+          "description": "Element shown while connecting"
+        }
+      ],
+      "groups": [
+        "progress"
+      ]
+    },
+    {
+      "id": "e-sse",
+      "name": "e-sse",
+      "tag": "template",
+      "is": "e-sse",
+      "icon": "stream",
+      "category": "data",
+      "invisible": true,
+      "description": "Opens a named EventSource (Server-Sent Events) connection, used by e-json with data-event-source.",
+      "source": "web-app/static/js/ehtml/E/e-sse.js",
+      "docs": "https://e-html.org/html/attributes.html#template-ise-sse",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-src",
+          "type": "url",
+          "required": true,
+          "placeholder": "/events"
+        },
+        {
+          "name": "data-event-source-name",
+          "type": "name",
+          "required": true
+        },
+        {
+          "name": "data-with-credentials",
+          "type": "enum",
+          "values": [
+            "true"
+          ]
+        },
+        {
+          "name": "data-connection-icon",
+          "type": "selector"
+        },
+        {
+          "name": "data-actions-on-open-connection",
+          "type": "actions"
+        }
+      ],
+      "suggestedChildren": [
+        "e-json",
+        "e-json-map"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+/* App-specific styles. Design tokens come from e-ui.css, fonts from fonts.css.
+   Prefer e-ui attributes in html (like data-font-family="typography" for Fraunces) over classes. */
+
+body {
+  font-family: var(--e-font-interface);
+  background: var(--e-bg);
+  color: var(--e-fg);
+}
+
+/* e-pages: css variables (edited in e-pages, "Edit CSS Variables") */
+:root {
+  --e-primary: #277767;
+}
+/* e-pages: end of css variables */

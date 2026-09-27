@@ -1,0 +1,25 @@
+{
+  "port": 443,
+  "host": "0.0.0.0",
+  "domain": "example.com",
+  "key": "./web-app/ssl/live/example.com/privkey.pem",
+  "cert": "./web-app/ssl/live/example.com/fullchain.pem",
+  "tmpKey": "./web-app/ssl/key.tmp.pem",
+  "tmpCert": "./web-app/ssl/cert.tmp.pem",
+  "webroot": "web-app",
+  "proxy": {
+    "port": 80
+  },
+  "useCache": true,
+  "cacheControl": "no-cache",
+  "db": {
+    "user": "app",
+    "password": "change-me",
+    "host": "db.example.com",
+    "port": 5432,
+    "database": "app",
+    "sslmode": "require",
+    "capath": "./web-app/ssl/db-ca-certificate.crt",
+    "maxConnectionsPerProcess": 10
+  }
+}

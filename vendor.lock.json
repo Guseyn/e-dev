@@ -1,0 +1,20 @@
+{
+  "nodes": {
+    "source": "github:Guseyn/nodes.js",
+    "ref": "HEAD",
+    "sha": "03cbb2543e88e41743fdfa3c17447211c359b08b",
+    "updatedAt": "2026-09-26T21:49:50.535Z"
+  },
+  "ehtml": {
+    "source": "local:/Users/guseyn/my-projects/EHTML",
+    "ref": "master",
+    "sha": "7846644bfbd6a800db7530ab8472c5eacb365dd7+uncommitted",
+    "updatedAt": "2026-09-27T08:20:59.350Z"
+  },
+  "eui": {
+    "source": "local:/Users/guseyn/my-projects/e-ui",
+    "ref": "main",
+    "sha": "a9836a157b138644623d581e306fb91b394f33a7+uncommitted",
+    "updatedAt": "2026-09-27T08:13:25.702Z"
+  }
+}

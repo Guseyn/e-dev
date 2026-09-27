@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/e-ui.css">
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "#ehtml/": "/js/ehtml/",
+        "#ehtml/main": "/js/ehtml/main.js",
+        "#e-ui/": "/js/e-ui/",
+        "#e-pages/": "/js/e-pages/"
+      }
+    }
+  </script>
+  <script type="module">
+    import '#ehtml/main'
+    import '#e-pages/loader.js'
+    import '#e-ui/e-dialog.js'
+  </script>
+</head>
+<body>
+  <main is="e-main" data-centralized>
+    <section is="e-section" data-padding="2xl">
+      <h1 is="e-h" data-font-family="typography">Test</h1>
+    </section>
+    <span is="e-caption">Caption</span>
+  </main>
+  <main is="e-main">
+    <dialog is="e-dialog" id="qwe" data-open-on-load="true">
+      <h3 is="e-h">Dialog</h3>
+      <p is="e-p">Content</p>
+    </dialog>
+  </main>
+</body>
+</html>

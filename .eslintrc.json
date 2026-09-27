@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "browser": true,
+    "es2022": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "ignorePatterns": [
+    "nodes/",
+    "web-app/static/js/ehtml/",
+    "web-app/static/js/e-ui/"
+  ],
+  "rules": {
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "quotes": ["error", "single", "avoid-escape"],
+    "semi": ["error", "never"],
+    "no-unused-vars": ["error", { "args": "none" }],
+    "no-template-curly-in-string": "off",
+    "no-case-declarations": "off",
+    "no-prototype-builtins": "off",
+    "no-inner-declarations": "off"
+  }
+}

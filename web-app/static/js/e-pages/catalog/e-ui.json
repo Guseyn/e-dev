@@ -1,0 +1,1827 @@
+{
+  "library": "e-ui",
+  "title": "e-ui",
+  "docs": "https://github.com/Guseyn/e-ui",
+  "groups": {
+    "spacing": [
+      {
+        "name": "data-padding",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ],
+        "description": "Padding"
+      },
+      {
+        "name": "data-padding-top",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ]
+      },
+      {
+        "name": "data-padding-bottom",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ]
+      },
+      {
+        "name": "data-padding-left",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ]
+      },
+      {
+        "name": "data-padding-right",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ]
+      },
+      {
+        "name": "data-margin-top",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ]
+      },
+      {
+        "name": "data-margin-bottom",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ]
+      },
+      {
+        "name": "data-margin-left",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ]
+      },
+      {
+        "name": "data-margin-right",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ]
+      }
+    ],
+    "flex": [
+      {
+        "name": "data-gap",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ],
+        "description": "Gap between children"
+      },
+      {
+        "name": "data-align-items",
+        "type": "enum",
+        "values": [
+          "start",
+          "center",
+          "end",
+          "stretch"
+        ]
+      },
+      {
+        "name": "data-justify-content",
+        "type": "enum",
+        "values": [
+          "start",
+          "center",
+          "end",
+          "space-between",
+          "stretch"
+        ]
+      },
+      {
+        "name": "data-flex-wrap",
+        "type": "enum",
+        "values": [
+          "wrap",
+          "nowrap"
+        ]
+      },
+      {
+        "name": "data-keep-flex-direction-row-in-mobile",
+        "type": "boolean",
+        "description": "Don't stack children on small screens"
+      }
+    ],
+    "text": [
+      {
+        "name": "data-font-size",
+        "type": "enum",
+        "values": [
+          "3xs",
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl"
+        ]
+      },
+      {
+        "name": "data-font-weight",
+        "type": "enum",
+        "values": [
+          "regular",
+          "medium",
+          "bold"
+        ]
+      },
+      {
+        "name": "data-font-family",
+        "type": "enum",
+        "values": [
+          "interface",
+          "typography",
+          "serif",
+          "sans-serif"
+        ]
+      },
+      {
+        "name": "data-color",
+        "type": "enum",
+        "values": [
+          "text",
+          "muted",
+          "primary",
+          "success",
+          "danger",
+          "light"
+        ]
+      },
+      {
+        "name": "data-text-align",
+        "type": "enum",
+        "values": [
+          "left",
+          "center",
+          "right"
+        ]
+      },
+      {
+        "name": "data-text-case",
+        "type": "enum",
+        "values": [
+          "normal",
+          "upper",
+          "lower",
+          "capitalize"
+        ]
+      },
+      {
+        "name": "data-text-ellipsis",
+        "type": "boolean"
+      },
+      {
+        "name": "data-text-nowrap",
+        "type": "boolean"
+      }
+    ],
+    "box": [
+      {
+        "name": "data-background",
+        "type": "enum",
+        "values": [
+          "surface",
+          "muted",
+          "primary",
+          "success",
+          "success-transparent",
+          "danger",
+          "danger-transparent",
+          "blurred"
+        ]
+      },
+      {
+        "name": "data-border",
+        "type": "boolean",
+        "description": "Border (or a value: top, bottom, left, right, none)"
+      },
+      {
+        "name": "data-border-radius",
+        "type": "enum",
+        "values": [
+          "0",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl",
+          "circle"
+        ]
+      },
+      {
+        "name": "data-box-shadow",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      {
+        "name": "data-width",
+        "type": "enum",
+        "values": [
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl",
+          "full",
+          "max-content"
+        ]
+      },
+      {
+        "name": "data-height",
+        "type": "enum",
+        "values": [
+          "2xs",
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl",
+          "3xl",
+          "full",
+          "max-content"
+        ]
+      },
+      {
+        "name": "data-hide-in-mobile",
+        "type": "boolean"
+      }
+    ],
+    "button": [
+      {
+        "name": "data-primary",
+        "type": "boolean",
+        "description": "Primary button style"
+      },
+      {
+        "name": "data-fill",
+        "type": "enum",
+        "values": [
+          "solid",
+          "outlined",
+          "danger"
+        ],
+        "description": "Fill of the button"
+      },
+      {
+        "name": "type",
+        "type": "enum",
+        "values": [
+          "button",
+          "submit",
+          "reset"
+        ]
+      }
+    ]
+  },
+  "elements": [
+    {
+      "id": "e-stack",
+      "name": "Stack",
+      "tag": "div",
+      "is": "e-stack",
+      "icon": "view_agenda",
+      "category": "layout",
+      "description": "Vertical flex layout with gap.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-stack\"]",
+      "content": "children",
+      "groups": [
+        "flex",
+        "spacing",
+        "box"
+      ],
+      "presetAttributes": [
+        [
+          "data-gap",
+          "md"
+        ]
+      ],
+      "parents": [
+        "*"
+      ],
+      "innerHTML": "<h3 is=\"e-h\">Title</h3>\n<p is=\"e-p\">Some text.</p>"
+    },
+    {
+      "id": "e-row",
+      "name": "Row",
+      "tag": "div",
+      "is": "e-row",
+      "icon": "view_column",
+      "category": "layout",
+      "description": "Horizontal flex layout with gap (stacks on mobile).",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-row\"]",
+      "content": "children",
+      "groups": [
+        "flex",
+        "spacing",
+        "box"
+      ],
+      "presetAttributes": [
+        [
+          "data-gap",
+          "md"
+        ]
+      ],
+      "innerHTML": "<div is=\"e-box\" data-padding=\"md\">First</div>\n<div is=\"e-box\" data-padding=\"md\">Second</div>"
+    },
+    {
+      "id": "e-grid",
+      "name": "Grid",
+      "tag": "div",
+      "is": "e-grid",
+      "icon": "grid_view",
+      "category": "layout",
+      "description": "Responsive grid.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-grid\"]",
+      "content": "children",
+      "groups": [
+        "flex",
+        "spacing",
+        "box"
+      ],
+      "attributes": [
+        {
+          "name": "data-columns",
+          "type": "enum",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "auto"
+          ],
+          "description": "Number of columns"
+        }
+      ],
+      "presetAttributes": [
+        [
+          "data-gap",
+          "md"
+        ],
+        [
+          "data-columns",
+          "3"
+        ]
+      ],
+      "suggestedChildren": [
+        "e-card",
+        "e-panel"
+      ],
+      "innerHTML": "<div is=\"e-card\" data-padding=\"lg\">\n  <h4 is=\"e-h\">Card 1</h4>\n  <p is=\"e-p\">Card text.</p>\n</div>\n<div is=\"e-card\" data-padding=\"lg\">\n  <h4 is=\"e-h\">Card 2</h4>\n  <p is=\"e-p\">Card text.</p>\n</div>\n<div is=\"e-card\" data-padding=\"lg\">\n  <h4 is=\"e-h\">Card 3</h4>\n  <p is=\"e-p\">Card text.</p>\n</div>"
+    },
+    {
+      "id": "e-main",
+      "name": "Main",
+      "tag": "main",
+      "is": "e-main",
+      "icon": "web_asset",
+      "category": "layout",
+      "description": "Main content area of the page.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-main\"]",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-centralized",
+          "type": "boolean",
+          "description": "Centered with max width"
+        }
+      ],
+      "groups": [
+        "spacing"
+      ],
+      "parents": [
+        "body"
+      ],
+      "suggestedChildren": [
+        "e-section"
+      ],
+      "innerHTML": "<section is=\"e-section\" data-padding=\"2xl\">\n  <h1 is=\"e-h\" data-font-family=\"typography\">Page title</h1>\n  <p is=\"e-p\">Page text.</p>\n</section>"
+    },
+    {
+      "id": "e-section",
+      "name": "Section",
+      "tag": "section",
+      "is": "e-section",
+      "icon": "view_day",
+      "category": "layout",
+      "description": "Section of the page.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-section\"]",
+      "content": "children",
+      "groups": [
+        "spacing",
+        "box"
+      ],
+      "suggestedChildren": [
+        "e-h",
+        "e-p",
+        "e-stack",
+        "e-grid"
+      ],
+      "innerHTML": "<h2 is=\"e-h\">Section title</h2>\n<p is=\"e-p\">Section text.</p>",
+      "presetAttributes": [
+        [
+          "data-padding",
+          "2xl"
+        ]
+      ]
+    },
+    {
+      "id": "e-header",
+      "name": "Header",
+      "tag": "header",
+      "is": "e-header",
+      "icon": "toolbar",
+      "category": "layout",
+      "description": "Page header.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-header\"]",
+      "content": "children",
+      "groups": [
+        "flex",
+        "spacing",
+        "box"
+      ],
+      "innerHTML": "<a is=\"e-link\" href=\"/\"><b>Brand</b></a>\n<div is=\"e-row\" data-gap=\"md\" data-keep-flex-direction-row-in-mobile>\n  <a is=\"e-link\" href=\"/\">Home</a>\n  <a is=\"e-link\" href=\"/html/about.html\">About</a>\n  <a is=\"e-link\" href=\"/html/contact.html\">Contact</a>\n</div>",
+      "presetAttributes": [
+        [
+          "data-padding",
+          "lg"
+        ],
+        [
+          "data-justify-content",
+          "space-between"
+        ]
+      ]
+    },
+    {
+      "id": "e-footer",
+      "name": "Footer",
+      "tag": "footer",
+      "is": "e-footer",
+      "icon": "call_to_action",
+      "category": "layout",
+      "description": "Page footer.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-footer\"]",
+      "content": "children",
+      "groups": [
+        "flex",
+        "spacing",
+        "box"
+      ],
+      "innerHTML": "<span is=\"e-muted\">© 2026 Company</span>\n<div is=\"e-row\" data-gap=\"md\" data-keep-flex-direction-row-in-mobile>\n  <a is=\"e-link\" href=\"/html/privacy.html\">Privacy</a>\n  <a is=\"e-link\" href=\"/html/terms.html\">Terms</a>\n</div>",
+      "presetAttributes": [
+        [
+          "data-padding",
+          "lg"
+        ],
+        [
+          "data-justify-content",
+          "space-between"
+        ]
+      ]
+    },
+    {
+      "id": "e-box",
+      "name": "Box",
+      "tag": "div",
+      "is": "e-box",
+      "icon": "check_box_outline_blank",
+      "category": "layout",
+      "description": "Generic box.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-box\"]",
+      "content": "children",
+      "groups": [
+        "spacing",
+        "box",
+        "flex"
+      ],
+      "innerHTML": "<p is=\"e-p\">Content</p>"
+    },
+    {
+      "id": "e-card",
+      "name": "Card",
+      "tag": "div",
+      "is": "e-card",
+      "icon": "rectangle",
+      "category": "layout",
+      "description": "Bordered surface with shadow.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-card\"]",
+      "content": "children",
+      "groups": [
+        "spacing",
+        "box",
+        "flex"
+      ],
+      "presetAttributes": [
+        [
+          "data-padding",
+          "lg"
+        ]
+      ],
+      "innerHTML": "<h4 is=\"e-h\">Card title</h4>\n<p is=\"e-p\">Card text.</p>"
+    },
+    {
+      "id": "e-panel",
+      "name": "Panel",
+      "tag": "div",
+      "is": "e-panel",
+      "icon": "view_stream",
+      "category": "layout",
+      "description": "Full-width elevated panel.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-panel\"]",
+      "content": "children",
+      "groups": [
+        "spacing",
+        "box",
+        "flex"
+      ],
+      "presetAttributes": [
+        [
+          "data-padding",
+          "lg"
+        ]
+      ],
+      "innerHTML": "<h4 is=\"e-h\">Panel title</h4>\n<p is=\"e-p\">Panel text.</p>"
+    },
+    {
+      "id": "e-info",
+      "name": "Info box",
+      "tag": "div",
+      "is": "e-info",
+      "icon": "info",
+      "category": "layout",
+      "description": "Muted background box for notices.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-info\"]",
+      "content": "children",
+      "groups": [
+        "spacing",
+        "box"
+      ],
+      "presetAttributes": [
+        [
+          "data-padding",
+          "md"
+        ]
+      ],
+      "innerHTML": "<span is=\"e-bold\">Note</span>\n<p is=\"e-p\">Information for the reader.</p>"
+    },
+    {
+      "id": "e-spacer",
+      "name": "Spacer",
+      "tag": "div",
+      "is": "e-spacer",
+      "icon": "space_bar",
+      "category": "layout",
+      "description": "Empty space that grows in flex layouts.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-spacer\"]",
+      "content": "none"
+    },
+    {
+      "id": "e-divider",
+      "name": "Divider",
+      "tag": "hr",
+      "is": "e-divider",
+      "icon": "horizontal_rule",
+      "category": "layout",
+      "description": "Horizontal line.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-divider\"]",
+      "content": "none",
+      "groups": [
+        "spacing"
+      ]
+    },
+    {
+      "id": "e-divider-text",
+      "name": "Divider with text",
+      "tag": "hr",
+      "is": "e-divider-text",
+      "icon": "horizontal_split",
+      "category": "layout",
+      "description": "Horizontal line with text in the middle (data-text).",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-divider-text\"]",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "data-text",
+          "type": "string",
+          "required": true,
+          "default": "or"
+        }
+      ]
+    },
+    {
+      "id": "e-h",
+      "name": "Heading",
+      "tag": "h2",
+      "is": "e-h",
+      "icon": "title",
+      "category": "text",
+      "description": "Heading (change tag to h1–h6).",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-h\"]",
+      "content": "text",
+      "defaultText": "Heading",
+      "tagChoices": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ],
+      "groups": [
+        "text",
+        "spacing"
+      ]
+    },
+    {
+      "id": "e-p",
+      "name": "Paragraph",
+      "tag": "p",
+      "is": "e-p",
+      "icon": "notes",
+      "category": "text",
+      "description": "Paragraph.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-p\"]",
+      "content": "text",
+      "defaultText": "Some text.",
+      "groups": [
+        "text",
+        "spacing"
+      ]
+    },
+    {
+      "id": "e-text",
+      "name": "Text",
+      "tag": "span",
+      "is": "e-text",
+      "icon": "text_fields",
+      "category": "text",
+      "description": "Inline text.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-text\"]",
+      "content": "text",
+      "defaultText": "Text",
+      "groups": [
+        "text"
+      ]
+    },
+    {
+      "id": "e-muted",
+      "name": "Muted text",
+      "tag": "span",
+      "is": "e-muted",
+      "icon": "format_color_text",
+      "category": "text",
+      "description": "Muted secondary text.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-muted\"]",
+      "content": "text",
+      "defaultText": "Secondary text",
+      "groups": [
+        "text"
+      ]
+    },
+    {
+      "id": "e-bold",
+      "name": "Bold text",
+      "tag": "span",
+      "is": "e-bold",
+      "icon": "format_bold",
+      "category": "text",
+      "description": "Bold emphasis.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-bold\"]",
+      "content": "text",
+      "defaultText": "Bold",
+      "groups": [
+        "text"
+      ]
+    },
+    {
+      "id": "e-light",
+      "name": "Light text",
+      "tag": "span",
+      "is": "e-light",
+      "icon": "text_format",
+      "category": "text",
+      "description": "Light text.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-light\"]",
+      "content": "text",
+      "defaultText": "Light",
+      "groups": [
+        "text"
+      ]
+    },
+    {
+      "id": "e-caption",
+      "name": "Caption",
+      "tag": "span",
+      "is": "e-caption",
+      "icon": "subtitles",
+      "category": "text",
+      "description": "Small supporting text.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-caption\"]",
+      "content": "text",
+      "defaultText": "Caption",
+      "groups": [
+        "text"
+      ]
+    },
+    {
+      "id": "e-helper",
+      "name": "Helper text",
+      "tag": "span",
+      "is": "e-helper",
+      "icon": "help",
+      "category": "text",
+      "description": "Helper text below a field.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-helper\"]",
+      "content": "text",
+      "defaultText": "Helper text",
+      "groups": [
+        "text"
+      ]
+    },
+    {
+      "id": "e-error",
+      "name": "Error text",
+      "tag": "span",
+      "is": "e-error",
+      "icon": "error",
+      "category": "text",
+      "description": "Error message.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-error\"]",
+      "content": "text",
+      "defaultText": "Something went wrong",
+      "groups": [
+        "text"
+      ]
+    },
+    {
+      "id": "e-danger",
+      "name": "Danger text",
+      "tag": "span",
+      "is": "e-danger",
+      "icon": "warning",
+      "category": "text",
+      "description": "Text in danger color.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-danger\"]",
+      "content": "text",
+      "defaultText": "Danger",
+      "groups": [
+        "text"
+      ]
+    },
+    {
+      "id": "e-mark",
+      "name": "Highlight",
+      "tag": "mark",
+      "is": "e-mark",
+      "icon": "format_ink_highlighter",
+      "category": "text",
+      "description": "Highlighted text.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-mark\"]",
+      "content": "text",
+      "defaultText": "highlighted"
+    },
+    {
+      "id": "e-code",
+      "name": "Inline code",
+      "tag": "code",
+      "is": "e-code",
+      "icon": "code",
+      "category": "text",
+      "description": "Inline code.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-code\"]",
+      "content": "text",
+      "defaultText": "code"
+    },
+    {
+      "id": "e-pre",
+      "name": "Code block",
+      "tag": "pre",
+      "is": "e-pre",
+      "icon": "terminal",
+      "category": "text",
+      "description": "Preformatted code block.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-pre\"]",
+      "content": "text",
+      "defaultText": "code"
+    },
+    {
+      "id": "e-quote",
+      "name": "Quote",
+      "tag": "blockquote",
+      "is": "e-quote",
+      "icon": "format_quote",
+      "category": "text",
+      "description": "Blockquote for testimonials or callouts.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-quote\"]",
+      "content": "text",
+      "defaultText": "Quote"
+    },
+    {
+      "id": "e-link",
+      "name": "Link",
+      "tag": "a",
+      "is": "e-link",
+      "icon": "link",
+      "category": "text",
+      "description": "Styled link.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-link\"]",
+      "content": "text",
+      "defaultText": "Link",
+      "attributes": [
+        {
+          "name": "href",
+          "type": "html-page",
+          "required": true,
+          "description": "Page or url"
+        },
+        {
+          "name": "data-underlined",
+          "type": "boolean"
+        }
+      ],
+      "groups": [
+        "text"
+      ]
+    },
+    {
+      "id": "e-link-button",
+      "name": "Link button",
+      "tag": "a",
+      "is": "e-link-button",
+      "icon": "open_in_new",
+      "category": "text",
+      "description": "Link that looks like a button.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-link-button\"]",
+      "content": "text",
+      "defaultText": "Open",
+      "attributes": [
+        {
+          "name": "href",
+          "type": "html-page",
+          "required": true,
+          "description": "Page or url"
+        }
+      ]
+    },
+    {
+      "id": "e-badge",
+      "name": "Badge",
+      "tag": "span",
+      "is": "e-badge",
+      "icon": "new_releases",
+      "category": "text",
+      "description": "Badge.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-badge\"]",
+      "content": "text",
+      "defaultText": "New",
+      "groups": [
+        "text",
+        "spacing"
+      ]
+    },
+    {
+      "id": "e-tag",
+      "name": "Tag",
+      "tag": "span",
+      "is": "e-tag",
+      "icon": "sell",
+      "category": "text",
+      "description": "Tag label.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-tag\"]",
+      "content": "text",
+      "defaultText": "Tag",
+      "groups": [
+        "text",
+        "spacing"
+      ]
+    },
+    {
+      "id": "e-chip",
+      "name": "Chip",
+      "tag": "span",
+      "is": "e-chip",
+      "icon": "label",
+      "category": "text",
+      "description": "Chip.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-chip\"]",
+      "content": "text",
+      "defaultText": "Chip"
+    },
+    {
+      "id": "e-list",
+      "name": "List",
+      "tag": "ul",
+      "is": "e-list",
+      "icon": "format_list_bulleted",
+      "category": "structure",
+      "description": "Styled list.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-list\"]",
+      "content": "children",
+      "innerHTML": "<li is=\"e-list-item\">First</li>\n<li is=\"e-list-item\">Second</li>\n<li is=\"e-list-item\">Third</li>",
+      "suggestedChildren": [
+        "e-list-item"
+      ]
+    },
+    {
+      "id": "e-list-item",
+      "name": "List item",
+      "tag": "li",
+      "is": "e-list-item",
+      "icon": "list",
+      "category": "structure",
+      "description": "Item of e-list.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-list-item\"]",
+      "content": "text",
+      "defaultText": "Item",
+      "parents": [
+        "e-list",
+        "ul",
+        "ol"
+      ]
+    },
+    {
+      "id": "e-table",
+      "name": "Table",
+      "tag": "table",
+      "is": "e-table",
+      "icon": "table",
+      "category": "structure",
+      "description": "Styled table.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-table\"]",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-zebra",
+          "type": "boolean"
+        }
+      ],
+      "innerHTML": "<thead>\n  <tr><th>Name</th></tr>\n</thead>\n<tbody>\n  <tr><td>Value</td></tr>\n</tbody>",
+      "suggestedChildren": [
+        "thead",
+        "tbody",
+        "tr"
+      ],
+      "presetAttributes": [
+        [
+          "data-zebra",
+          null
+        ]
+      ]
+    },
+    {
+      "id": "e-details",
+      "name": "Details",
+      "tag": "details",
+      "is": "e-details",
+      "icon": "expand_more",
+      "category": "structure",
+      "description": "Expandable details.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-details\"]",
+      "content": "children",
+      "innerHTML": "<summary>More</summary>\n<p is=\"e-p\">Hidden content</p>"
+    },
+    {
+      "id": "e-fieldset",
+      "name": "Fieldset",
+      "tag": "fieldset",
+      "is": "e-fieldset",
+      "icon": "select_all",
+      "category": "form",
+      "description": "Group of form fields.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-fieldset\"]",
+      "content": "children",
+      "innerHTML": "<legend is=\"e-legend\">Group</legend>\n<label>\n  Name\n  <input type=\"text\" name=\"name\" placeholder=\"Name\">\n</label>"
+    },
+    {
+      "id": "e-legend",
+      "name": "Legend",
+      "tag": "legend",
+      "is": "e-legend",
+      "icon": "label_important",
+      "category": "form",
+      "description": "Title of a fieldset.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-legend\"]",
+      "content": "text",
+      "defaultText": "Group",
+      "parents": [
+        "e-fieldset",
+        "fieldset"
+      ]
+    },
+    {
+      "id": "e-user-avatar",
+      "name": "User avatar",
+      "tag": "img",
+      "is": "e-user-avatar",
+      "icon": "account_circle",
+      "category": "media",
+      "description": "Round user picture.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-user-avatar\"]",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "src",
+          "type": "url",
+          "required": true
+        },
+        {
+          "name": "alt",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "e-with-icon",
+      "name": "Icon button",
+      "tag": "button",
+      "is": "e-with-icon",
+      "icon": "smart_button",
+      "category": "ui",
+      "description": "Button with an icon.",
+      "source": "web-app/static/css/e-ui.css",
+      "search": "[is=\"e-with-icon\"]",
+      "content": "children",
+      "innerHTML": "<img src=\"/images/favicon.svg\" alt=\"\" data-size=\"sm\">",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "groups": [
+        "button"
+      ]
+    },
+    {
+      "id": "e-kbd",
+      "name": "Keyboard shortcut",
+      "tag": "kbd",
+      "is": "e-kbd",
+      "icon": "keyboard",
+      "category": "ui",
+      "description": "Keyboard key that runs an action when pressed.",
+      "source": "web-app/static/js/e-ui/e-kbd.js",
+      "content": "text",
+      "defaultText": "K",
+      "attributes": [
+        {
+          "name": "data-action",
+          "type": "actions",
+          "required": true
+        },
+        {
+          "name": "data-trigger-in-inputs",
+          "type": "boolean"
+        }
+      ],
+      "requires": [
+        "#e-ui/e-kbd.js"
+      ]
+    },
+    {
+      "id": "e-autoclick",
+      "name": "Auto-click button",
+      "tag": "button",
+      "is": "e-autoclick",
+      "icon": "touch_app",
+      "category": "ui",
+      "description": "Button that clicks itself when the condition is true.",
+      "source": "web-app/static/js/e-ui/e-autoclick-button.js",
+      "content": "text",
+      "defaultText": "Continue",
+      "attributes": [
+        {
+          "name": "data-condition-to-click",
+          "type": "expression",
+          "required": true
+        }
+      ],
+      "groups": [
+        "button"
+      ],
+      "requires": [
+        "#e-ui/e-autoclick-button.js"
+      ]
+    },
+    {
+      "id": "e-toast",
+      "name": "Toast",
+      "tag": "e-toast",
+      "icon": "notifications",
+      "category": "ui",
+      "description": "Toast notification.",
+      "source": "web-app/static/js/e-ui/e-toast.js",
+      "content": "text",
+      "defaultText": "Saved",
+      "attributes": [
+        {
+          "name": "data-state",
+          "type": "enum",
+          "values": [
+            "open",
+            "closed"
+          ]
+        },
+        {
+          "name": "data-icon",
+          "type": "url"
+        },
+        {
+          "name": "data-close-icon",
+          "type": "url"
+        },
+        {
+          "name": "data-hide-after-n-seconds",
+          "type": "string",
+          "placeholder": "3"
+        },
+        {
+          "name": "data-dont-close-others",
+          "type": "boolean"
+        }
+      ],
+      "requires": [
+        "#e-ui/e-toast.js"
+      ],
+      "presetAttributes": [
+        [
+          "data-icon",
+          "/images/icons/check_circle.svg"
+        ],
+        [
+          "data-close-icon",
+          "/images/close.svg"
+        ]
+      ]
+    },
+    {
+      "id": "e-dialog",
+      "name": "Dialog",
+      "tag": "dialog",
+      "is": "e-dialog",
+      "icon": "picture_in_picture",
+      "category": "ui",
+      "description": "Modal dialog with a close icon. Open it with document.querySelector('#dialog').showModal().",
+      "source": "web-app/static/js/e-ui/e-dialog.js",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "default": "dialog",
+          "description": "Open it with document.querySelector('#dialog').showModal()"
+        },
+        {
+          "name": "data-open-on-load",
+          "type": "boolean"
+        },
+        {
+          "name": "data-onopen",
+          "type": "actions"
+        },
+        {
+          "name": "data-onclose",
+          "type": "actions"
+        },
+        {
+          "name": "data-close-icon",
+          "type": "url"
+        },
+        {
+          "name": "data-keep-open-on-escape",
+          "type": "boolean"
+        },
+        {
+          "name": "data-no-backdrop-close",
+          "type": "boolean"
+        },
+        {
+          "name": "data-size",
+          "type": "enum",
+          "values": [
+            "small",
+            "normal",
+            "large",
+            "full"
+          ]
+        }
+      ],
+      "innerHTML": "<div is=\"e-stack\" data-gap=\"md\" data-padding=\"lg\">\n  <h3 is=\"e-h\">Dialog title</h3>\n  <p is=\"e-p\">Dialog content.</p>\n  <div is=\"e-row\" data-gap=\"sm\" data-justify-content=\"end\" data-keep-flex-direction-row-in-mobile>\n    <button data-primary data-fill=\"outlined\" onclick=\"this.closest('dialog').close()\">Cancel</button>\n    <button data-primary onclick=\"this.closest('dialog').close()\">OK</button>\n  </div>\n</div>",
+      "requires": [
+        "#e-ui/e-dialog.js"
+      ],
+      "presetAttributes": [
+        [
+          "data-size",
+          "normal"
+        ],
+        [
+          "data-close-icon",
+          "/images/close.svg"
+        ]
+      ]
+    },
+    {
+      "id": "e-confirm",
+      "name": "Confirm",
+      "tag": "e-confirm",
+      "icon": "check_circle",
+      "category": "ui",
+      "description": "Promise-based confirm dialog: await document.querySelector('e-confirm').ask(...).",
+      "source": "web-app/static/js/e-ui/e-confirm.js",
+      "content": "none",
+      "requires": [
+        "#e-ui/e-confirm.js"
+      ]
+    },
+    {
+      "id": "e-date",
+      "name": "Date input",
+      "tag": "input",
+      "is": "e-date",
+      "icon": "calendar_month",
+      "category": "form",
+      "description": "Date picker (put it inside e-form, it is styled there).",
+      "source": "web-app/static/js/e-ui/e-date.js",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "data-d",
+          "type": "string"
+        },
+        {
+          "name": "data-m",
+          "type": "string"
+        },
+        {
+          "name": "data-y",
+          "type": "string"
+        },
+        {
+          "name": "min",
+          "type": "string"
+        },
+        {
+          "name": "max",
+          "type": "string"
+        }
+      ],
+      "requires": [
+        "#e-ui/e-date.js"
+      ],
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array",
+        "e-fieldset",
+        "fieldset"
+      ]
+    },
+    {
+      "id": "e-time",
+      "name": "Time input",
+      "tag": "input",
+      "is": "e-time",
+      "icon": "schedule",
+      "category": "form",
+      "description": "12-hour time picker (put it inside e-form, it is styled there).",
+      "source": "web-app/static/js/e-ui/e-time.js",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "requires": [
+        "#e-ui/e-time.js"
+      ],
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array",
+        "e-fieldset",
+        "fieldset"
+      ]
+    },
+    {
+      "id": "e-sidebar",
+      "name": "Sidebar",
+      "tag": "e-sidebar",
+      "icon": "side_navigation",
+      "category": "ui",
+      "description": "Sidebar with header, links and footer; ⇧S opens and closes it (e-kbd).",
+      "source": "web-app/static/js/e-ui/e-sidebar.js",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-side",
+          "type": "enum",
+          "values": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "name": "data-state",
+          "type": "enum",
+          "values": [
+            "open",
+            "closed"
+          ]
+        },
+        {
+          "name": "data-mobile-header",
+          "type": "selector"
+        },
+        {
+          "name": "data-mobile-menu-icon",
+          "type": "url"
+        },
+        {
+          "name": "data-mobile-menu-icon-corner",
+          "type": "string"
+        },
+        {
+          "name": "data-mobile-body-overlay",
+          "type": "boolean"
+        }
+      ],
+      "parents": [
+        "body"
+      ],
+      "requires": [
+        "#e-ui/e-kbd.js",
+        "#e-ui/e-sidebar.js"
+      ],
+      "presetAttributes": [
+        [
+          "data-side",
+          "left"
+        ],
+        [
+          "data-mobile-menu-icon",
+          "/images/icons/menu.svg"
+        ]
+      ],
+      "innerHTML": "<header>\n  <img src=\"/images/favicon.svg\" alt=\"Logo\" data-size=\"xs\">\n</header>\n<kbd\n  is=\"e-kbd\"\n  data-absolute\n  aria-label=\"Toggle sidebar open or closed. Shortcut: Shift S\"\n  aria-keyshortcuts=\"Shift+S\"\n  data-action=\"\n    const sidebar = document.querySelector('e-sidebar')\n    if (sidebar.getAttribute('data-state') === 'open') {\n      sidebar.close()\n    } else {\n      sidebar.open()\n    }\n  \">\n  ⇧ + S\n</kbd>\n<nav>\n  <a href=\"/\" data-selected=\"true\">\n    <img alt=\"\" aria-hidden=\"true\" src=\"/images/icons/home.svg\">\n    <span>Home</span>\n  </a>\n  <a href=\"/html/about.html\">\n    <img alt=\"\" aria-hidden=\"true\" src=\"/images/icons/info.svg\">\n    <span>About</span>\n  </a>\n  <a href=\"/html/contact.html\">\n    <img alt=\"\" aria-hidden=\"true\" src=\"/images/icons/mail.svg\">\n    <span>Contact</span>\n  </a>\n  <hr is=\"e-divider\">\n  <a href=\"/html/settings.html\">\n    <img alt=\"\" aria-hidden=\"true\" src=\"/images/icons/settings.svg\">\n    <span>Settings</span>\n  </a>\n</nav>\n<footer>\n  <div is=\"e-row\" data-justify-content=\"space-between\" data-keep-flex-direction-row-in-mobile>\n    <span is=\"e-muted\" data-hide-on-sidebar-closed>Company</span>\n    <button is=\"e-with-icon\" aria-label=\"Collapse sidebar\" onclick=\"document.querySelector('e-sidebar').close()\">\n      <img alt=\"\" aria-hidden=\"true\" src=\"/images/icons/left_panel_close.svg\">\n    </button>\n  </div>\n</footer>"
+    },
+    {
+      "id": "e-tabs",
+      "name": "Tabs",
+      "tag": "e-tabs",
+      "icon": "tab",
+      "category": "ui",
+      "description": "Tabs; each e-tab is a tab.",
+      "source": "web-app/static/js/e-ui/e-tab.js",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-current-tab",
+          "type": "string"
+        },
+        {
+          "name": "data-apply-hash-navigation",
+          "type": "boolean"
+        }
+      ],
+      "innerHTML": "<e-tab data-title=\"First\">\n  <p is=\"e-p\">First tab</p>\n</e-tab>\n<e-tab data-title=\"Second\">\n  <p is=\"e-p\">Second tab</p>\n</e-tab>",
+      "suggestedChildren": [
+        "e-tab"
+      ],
+      "requires": [
+        "#e-ui/e-tab.js"
+      ]
+    },
+    {
+      "id": "e-tab",
+      "name": "Tab",
+      "tag": "e-tab",
+      "icon": "tab",
+      "category": "ui",
+      "description": "One tab of e-tabs.",
+      "source": "web-app/static/js/e-ui/e-tab.js",
+      "content": "children",
+      "parents": [
+        "e-tabs"
+      ],
+      "attributes": [
+        {
+          "name": "data-title",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "requires": [
+        "#e-ui/e-tab.js"
+      ]
+    },
+    {
+      "id": "e-kbd-graph",
+      "name": "Keyboard navigation",
+      "tag": "e-kbd-graph",
+      "icon": "keyboard_command_key",
+      "category": "ui",
+      "description": "Arrow-key navigation between elements.",
+      "source": "web-app/static/js/e-ui/e-kbd-graph.js",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-first-element",
+          "type": "selector"
+        },
+        {
+          "name": "data-up",
+          "type": "string"
+        },
+        {
+          "name": "data-down",
+          "type": "string"
+        },
+        {
+          "name": "data-left",
+          "type": "string"
+        },
+        {
+          "name": "data-right",
+          "type": "string"
+        },
+        {
+          "name": "data-click-on-enter",
+          "type": "boolean"
+        }
+      ],
+      "requires": [
+        "#e-ui/e-kbd-graph.js"
+      ]
+    },
+    {
+      "id": "e-selectable-chip",
+      "name": "Selectable chip",
+      "tag": "e-selectable-chip",
+      "icon": "toggle_on",
+      "category": "form",
+      "description": "Chip that can be selected (for filters) (put it inside e-form, it is styled there).",
+      "source": "web-app/static/js/e-ui/e-selectable-chip.js",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "data-text",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "data-value",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "data-selected",
+          "type": "boolean"
+        }
+      ],
+      "requires": [
+        "#e-ui/e-selectable-chip.js"
+      ],
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array",
+        "e-fieldset",
+        "fieldset"
+      ]
+    },
+    {
+      "id": "e-file-upload",
+      "name": "File upload",
+      "tag": "template",
+      "is": "e-file-upload",
+      "icon": "upload_file",
+      "category": "form",
+      "invisible": true,
+      "description": "Drag and drop (or click) file upload field of e-form; gets an e-form around it when added outside of one.",
+      "source": "web-app/static/js/e-ui/e-file-upload-template.js",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "data-name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "data-max-number-of-files",
+          "type": "string"
+        },
+        {
+          "name": "data-label-text",
+          "type": "string"
+        },
+        {
+          "name": "data-required",
+          "type": "boolean"
+        },
+        {
+          "name": "data-actions-on-file-load-end",
+          "type": "actions"
+        },
+        {
+          "name": "data-show-errors-in-toast",
+          "type": "boolean"
+        },
+        {
+          "name": "data-set-height",
+          "type": "boolean",
+          "description": "Taller drop area (fits a preview image)"
+        }
+      ],
+      "requires": [
+        "#e-ui/e-file-upload-template.js"
+      ],
+      "presetAttributes": [
+        [
+          "data-icon-src",
+          "/images/icons/upload_file.svg"
+        ],
+        [
+          "data-action-text",
+          "Click or drag a file here to upload"
+        ],
+        [
+          "data-details-text",
+          "PNG, JPG up to 2MB"
+        ],
+        [
+          "data-accept",
+          "image/png, image/jpeg"
+        ],
+        [
+          "data-max-size-in-mb",
+          "2"
+        ]
+      ],
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array",
+        "e-fieldset",
+        "fieldset"
+      ],
+      "wrapInForm": true
+    },
+    {
+      "id": "e-multiselect-dropdown",
+      "name": "Multiselect dropdown",
+      "tag": "template",
+      "is": "e-multiselect-dropdown",
+      "icon": "checklist",
+      "category": "form",
+      "invisible": true,
+      "description": "Dropdown with search to select many options (needs e-kbd.js) (put it inside e-form, it is styled there).",
+      "source": "web-app/static/js/e-ui/e-multiselect-dropdown-template.js",
+      "content": "children",
+      "attributes": [
+        {
+          "name": "data-name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "data-label",
+          "type": "string"
+        },
+        {
+          "name": "data-always-on",
+          "type": "boolean"
+        },
+        {
+          "name": "data-no-results-on-search-message",
+          "type": "string"
+        },
+        {
+          "name": "data-selected-chip-close-icon",
+          "type": "url"
+        }
+      ],
+      "innerHTML": "<option value=\"one\">One</option>\n<option value=\"two\">Two</option>",
+      "requires": [
+        "#e-ui/e-kbd.js",
+        "#e-ui/e-multiselect-dropdown-template.js"
+      ],
+      "presetAttributes": [
+        [
+          "data-selected-chip-close-icon",
+          "/images/icons/close.svg"
+        ]
+      ],
+      "parents": [
+        "e-form",
+        "e-form-object",
+        "e-form-array",
+        "e-fieldset",
+        "fieldset"
+      ]
+    },
+    {
+      "id": "e-week-picker",
+      "name": "Week picker",
+      "tag": "template",
+      "is": "e-week-picker",
+      "icon": "date_range",
+      "category": "form",
+      "invisible": true,
+      "description": "Week navigation (previous / next / current).",
+      "source": "web-app/static/js/e-ui/e-week-picker-template.js",
+      "content": "none",
+      "attributes": [
+        {
+          "name": "data-week-picker-id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "data-prev-click",
+          "type": "actions"
+        },
+        {
+          "name": "data-next-click",
+          "type": "actions"
+        },
+        {
+          "name": "data-view-click",
+          "type": "actions"
+        },
+        {
+          "name": "data-prev-icon",
+          "type": "url"
+        },
+        {
+          "name": "data-next-icon",
+          "type": "url"
+        }
+      ],
+      "requires": [
+        "#e-ui/e-week-picker-template.js"
+      ],
+      "presetAttributes": [
+        [
+          "data-prev-icon",
+          "/images/icons/chevron_left.svg"
+        ],
+        [
+          "data-next-icon",
+          "/images/icons/chevron_right.svg"
+        ]
+      ]
+    }
+  ]
+}

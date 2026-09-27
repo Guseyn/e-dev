@@ -1,0 +1,63 @@
+{
+  "name": "e-pages",
+  "version": "0.1.0",
+  "description": "Toolkit for building web applications with EHTML + e-ui + nodes",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node web-app/main.js",
+    "start:local": "ENV=local npm run start",
+    "start:preprod": "ENV=preprod npm run start",
+    "start:prod": "ENV=prod npm run start",
+    "restart": "node web-app/restart.js",
+    "restart:local": "ENV=local npm run restart",
+    "restart:preprod": "ENV=preprod npm run restart",
+    "restart:prod": "ENV=prod npm run restart",
+    "pull": "node web-app/pull.js",
+    "pull:preprod": "ENV=preprod npm run pull",
+    "pull:prod": "ENV=prod npm run pull",
+    "migrate": "node web-app/runners/migrate.js",
+    "cache": "node web-app/cache.js",
+    "lint": "eslint --fix web-app/*.js web-app/api web-app/db web-app/runners web-app/jobs web-app/utils web-app/static/js/e-pages",
+    "nodes:update": "scripts/vendor.sh nodes remote",
+    "ehtml:update": "scripts/vendor.sh ehtml remote",
+    "eui:update": "scripts/vendor.sh eui remote",
+    "e-pages:update": "scripts/vendor.sh e-pages remote",
+    "nodes:local:update": "scripts/vendor.sh nodes local",
+    "ehtml:local:update": "scripts/vendor.sh ehtml local",
+    "eui:local:update": "scripts/vendor.sh eui local",
+    "e-pages:local:update": "scripts/vendor.sh e-pages local",
+    "nodes:local:reverse": "scripts/vendor.sh nodes reverse",
+    "ehtml:local:reverse": "scripts/vendor.sh ehtml reverse",
+    "eui:local:reverse": "scripts/vendor.sh eui reverse",
+    "e-pages:local:reverse": "scripts/vendor.sh e-pages reverse",
+    "catalog:check": "node scripts/catalog-check.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Guseyn/e-pages.git"
+  },
+  "author": "Guseyn Ismayylov",
+  "license": "MIT",
+  "imports": {
+    "#nodes/*": "./nodes/*",
+    "#web-app/*": "./web-app/*"
+  },
+  "browser.importmap": {
+    "#ehtml/": "/js/ehtml/",
+    "#ehtml/main": "/js/ehtml/main.js",
+    "#e-ui/": "/js/e-ui/",
+    "#e-pages/": "/js/e-pages/"
+  },
+  "jsFileEntriesForCacheUpdates": [
+    "./web-app/static/js/ehtml/main.js"
+  ],
+  "dependencies": {
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}

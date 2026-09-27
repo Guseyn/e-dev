@@ -1,0 +1,46 @@
+# Used on the server by bootstrap.sh and deploy.sh.
+# Values come from .env next to this file (written by bootstrap.sh):
+#   ENV, APP_UID, APP_GID, COMPOSE_PROJECT_NAME
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    # Same user as the owner of the repo on the host, so the app can write
+    # into mounted files (primary.pid, output.log, ?v= cache versions, db schema)
+    user: "${APP_UID:-1000}:${APP_GID:-1000}"
+    environment:
+      ENV: ${ENV:-prod}
+    # nodes forwards SIGINT/SIGTERM to workers and waits for them to exit
+    stop_signal: SIGINT
+    stop_grace_period: 30s
+    volumes:
+      # The whole repo is mounted, so `git pull` + restart updates code without rebuilding.
+      - ./:/app
+      # ...except node_modules, which stay from the image
+      # (deploy.sh uses --renew-anon-volumes, so they're refreshed on every rebuild)
+      - /app/node_modules
+    # Docker lets non-root users bind low ports inside the container's own network.
+    # Extra ports (like websockets) go to docker-compose.override.yml, written by bootstrap.sh.
+    ports:
+      - "443:443"
+      - "80:80"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  # One-off container for Let's Encrypt certificates:
+  #   docker compose --profile certbot run --rm certbot certonly ...
+  # The app serves ACME challenges from web-app/.well-known on port 80 (nodes proxy)
+  # and reads certificates from web-app/ssl/live/<domain>/.
+  certbot:
+    image: certbot/certbot
+    profiles: ["certbot"]
+    volumes:
+      - ./web-app/.well-known/acme-challenge:/var/www/html/.well-known/acme-challenge
+      - ./web-app/ssl:/etc/letsencrypt

@@ -1,0 +1,16 @@
+{
+  "port": 4200,
+  "host": "127.0.0.1",
+  "domain": "",
+  "key": "./web-app/ssl/key.tmp.pem",
+  "cert": "./web-app/ssl/cert.tmp.pem",
+  "tmpKey": "./web-app/ssl/key.tmp.pem",
+  "tmpCert": "./web-app/ssl/cert.tmp.pem",
+  "webroot": "web-app",
+  "numberOfWorkers": 2,
+  "useCache": false,
+  "cacheControl": "no-cache",
+  "ePages": {
+    "editor": "subl"
+  }
+}

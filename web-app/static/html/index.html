@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-pages</title>
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/e-ui.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "#ehtml/": "/js/ehtml/",
+        "#ehtml/main": "/js/ehtml/main.js",
+        "#e-ui/": "/js/e-ui/",
+        "#e-pages/": "/js/e-pages/"
+      }
+    }
+  </script>
+  <script type="module">
+    import '#ehtml/main'
+    import '#e-pages/loader.js'
+    import '#e-ui/e-week-picker-template.js'
+    import '#e-ui/e-file-upload-template.js'
+    import '#e-ui/e-date.js'
+    import '#e-ui/e-kbd.js'
+    import '#e-ui/e-sidebar.js'
+  </script>
+</head>
+<body>
+  <main is="e-main">
+    <template
+      is="e-wrapper"
+      data-src="/html/templates/account-new.html"
+      data-where-to-place="#content"
+      data-how-to-place="inside">
+      <span is="e-badge" data-padding="xl" data-font-size="xl">New</span>
+    </template>
+  </main>
+</body>
+</html>

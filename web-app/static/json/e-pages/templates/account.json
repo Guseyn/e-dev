@@ -1,0 +1,71 @@
+{
+  "page": "html/templates/account.html",
+  "kind": "template",
+  "version": 5,
+  "nextId": 28,
+  "root": {
+    "type": "fragment",
+    "children": [
+      {
+        "type": "element",
+        "tag": "header",
+        "attrs": [
+          [
+            "is",
+            "e-section"
+          ],
+          [
+            "data-padding",
+            "lg"
+          ]
+        ],
+        "children": [
+          {
+            "type": "element",
+            "tag": "a",
+            "attrs": [
+              [
+                "is",
+                "e-link"
+              ],
+              [
+                "href",
+                "/"
+              ]
+            ],
+            "children": [
+              {
+                "type": "text",
+                "value": "Home"
+              }
+            ],
+            "id": "n2"
+          }
+        ],
+        "id": "n1"
+      },
+      {
+        "type": "element",
+        "tag": "main",
+        "attrs": [
+          [
+            "is",
+            "e-main"
+          ],
+          [
+            "data-centralized",
+            null
+          ]
+        ],
+        "children": [],
+        "id": "n3"
+      }
+    ]
+  },
+  "htmlHash": "b086989ea30145f7",
+  "lines": {
+    "n1": 1,
+    "n2": 1,
+    "n3": 2
+  }
+}

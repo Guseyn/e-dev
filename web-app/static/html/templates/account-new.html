@@ -1,0 +1,46 @@
+<header is="e-section" data-padding="lg"><a is="e-link" href="/">Home</a></header>
+<main is="e-main" data-centralized>
+  <div id="content"></div>
+  <e-sidebar data-side="left" data-mobile-menu-icon="/images/icons/menu.svg">
+    <header><img src="/images/favicon.svg" alt="Logo" data-size="xs"></header>
+    <kbd
+      is="e-kbd"
+      data-absolute
+      aria-label="Toggle sidebar open or closed. Shortcut: Shift S"
+      aria-keyshortcuts="Shift+S"
+      data-action="
+        const sidebar = document.querySelector('e-sidebar')
+        if (sidebar.getAttribute('data-state') === 'open') {
+          sidebar.close()
+        } else {
+          sidebar.open()
+        }
+      ">
+      ⇧ + S
+    </kbd>
+    <nav>
+      <a href="/" data-selected="true">
+        <img alt="" aria-hidden="true" src="/images/icons/home.svg">
+        <span>Home</span>
+      </a>
+      <a href="/html/about.html"><img alt="" aria-hidden="true" src="/images/icons/info.svg"> <span>About</span></a>
+      <a href="/html/contact.html"><img alt="" aria-hidden="true" src="/images/icons/mail.svg"> <span>Contact</span></a>
+      <hr is="e-divider">
+      <a href="/html/settings.html">
+        <img alt="" aria-hidden="true" src="/images/icons/settings.svg">
+        <span>Settings</span>
+      </a>
+    </nav>
+    <footer>
+      <div is="e-row" data-justify-content="space-between" data-keep-flex-direction-row-in-mobile>
+        <span is="e-muted" data-hide-on-sidebar-closed>Company</span>
+        <button
+          is="e-with-icon"
+          aria-label="Collapse sidebar"
+          onclick="document.querySelector('e-sidebar').close()">
+          <img alt="" aria-hidden="true" src="/images/icons/left_panel_close.svg">
+        </button>
+      </div>
+    </footer>
+  </e-sidebar>
+</main>

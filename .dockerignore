@@ -1,0 +1,11 @@
+node_modules
+.git
+.gitignore
+.DS_Store
+Dockerfile
+docker-compose*.yml
+output.log
+npm-debug.log
+deploy
+web-app/env/*
+!web-app/env/*.example.json
