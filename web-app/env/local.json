@@ -10,7 +10,7 @@
   "numberOfWorkers": 2,
   "useCache": false,
   "cacheControl": "no-cache",
-  "ePages": {
+  "eDev": {
     "editor": "subl"
   }
 }

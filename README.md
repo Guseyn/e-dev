@@ -1,4 +1,4 @@
-# e-pages
+# e-dev
 
 Toolkit for building web applications with [EHTML](https://e-html.org) + [e-ui](https://github.com/Guseyn/e-ui) + [nodes](https://github.com/Guseyn/nodes.js).
 
@@ -6,7 +6,7 @@ It's a blueprint for new apps, and a source of parts to bring into existing ones
 
 - **Server**: nodes (HTTP/2, cluster of workers, zero-downtime restarts), one handler per file in `web-app/api`.
 - **Frontend**: EHTML + e-ui, served as plain files, no build step.
-- **e-pages editor**: open any page locally with `?dev=true` to add, edit, move and delete elements visually, and jump from any element to its code in your editor.
+- **e-dev**: open any page locally with `?dev=true`, then Alt + click any element to open its line in your editor (Sublime by default). This works through `e-wrapper`, `e-html`, `e-for-each`, `e-if` and other templates.
 - **Deploy**: `bootstrap.sh` sets up any Linux VPS (Docker, firewall, GitHub deploy key, Let's Encrypt), `deploy.sh` deploys changes.
 
 ## Quick start
@@ -16,7 +16,7 @@ npm install
 npm start            # https://127.0.0.1:4200 (self-signed certificate)
 ```
 
-Open https://127.0.0.1:4200/?dev=true to edit the page with e-pages.
+Open https://127.0.0.1:4200/?dev=true and Alt + click any element to open it in Sublime.
 
 ## Structure
 
@@ -26,13 +26,13 @@ web-app/
   main.js                    starts primary process + workers
   primary.js                 runs once: cache versions, migrations, background jobs
   worker.js                  runs in each worker: server with routes
-  routes.js                  all endpoints and static files (e-pages reads it too)
+  routes.js                  all endpoints and static files (e-dev reads it too)
   restart.js                 zero-downtime restart of workers (npm run restart)
   pull.js                    after git pull on a server: updates ?v= cache versions
   cache.js                   updates ?v= cache versions in static files
   logo.txt
   api/                       endpoint handlers, one per file
-    e-pages/                 e-pages editor API (local environment only)
+    e-dev/                 e-dev API (local environment only)
   env/                       config per environment: local.json (tracked), prod.example.json
   db/                        client.js, migrations/NNN_name.sql, schema/ (generated snapshot)
   runners/migrate.js         runs migrations (npm run migrate, and on start/restart)
@@ -41,12 +41,11 @@ web-app/
   ssl/                       temporary certificate; Let's Encrypt writes live/<domain>/ here
   static/
     html/                    pages; html/templates/ for e-wrapper templates
-    json/e-pages/            e-pages models of pages (not served)
     js/ehtml/ js/e-ui/       libraries (shadow copies)
-    js/e-pages/              e-pages editor (loader.js, editor, catalog/)
-    images/icons/            Google Material Symbols (Apache 2.0) used by the editor and element presets
+    js/e-dev/              e-dev (loader.js, tracker.js, inspect.js, styles-of.js)
+    images/icons/            Google Material Symbols (Apache 2.0)
     css/ font/ images/ md/ xml/
-scripts/                     vendor.sh (library updates), catalog-check.js, lib/
+scripts/                     vendor.sh (library updates), lib/
 bootstrap.sh deploy.sh       VPS setup and deploy
 Dockerfile docker-compose.yml
 ```
@@ -63,77 +62,139 @@ Dockerfile docker-compose.yml
 | `npm run nodes:update`, `ehtml:update`, `eui:update` | Update a library from GitHub (`-- <ref>` for a tag/commit, default branch otherwise) |
 | `npm run nodes:local:update`, `ehtml:local:update`, `eui:local:update` | Update from a local checkout (`../nodes.js`, `../EHTML`, `../e-ui`, or `NODES_PATH`, `EHTML_PATH`, `EUI_PATH`) |
 | `npm run *:local:reverse` | Copy this project's copy back into the local checkout |
-| `npm run e-pages:update` | In other projects: bring the e-pages editor from this repo |
-| `npm run catalog:check` | Warn about EHTML / e-ui elements missing from the e-pages catalog |
+| `npm run e-dev:update` | In other projects: bring e-dev from this repo |
 
 Every update is recorded in `vendor.lock.json` (source, ref, commit).
 
 > The `nodes/` copy has fixes that are not in nodes.js yet (see "nodes fixes" below).
 > Don't run `nodes:update` until they are upstream, it would overwrite them.
 
-## e-pages editor
+## e-dev
 
-Include the loader on a page (new pages created by e-pages have it):
+e-dev takes you from any element on the page to the line where it's written, even when the element
+was rendered by a template (`e-wrapper`, `e-html`, `e-for-each`, `e-if`, templates released by
+`mapToTemplate()` into `data-insert-into` slots...), rendered from markdown (`e-markdown`),
+or created by a script (the generated parts of e-ui components, like the drop zone of `e-file-upload`).
+
+Include the loader on a page, or let dev mode add it for you (see below):
 
 ```html
 <script type="module">
   import '#ehtml/main'
-  import '#e-pages/loader.js'
+  import '#e-dev/loader.js'
 </script>
 ```
 
-The loader does nothing unless the url has `?dev=true`, and it starts the editor only on `localhost` / `127.0.0.1`.
-On other hosts it just logs a warning. The e-pages API exists only when the app runs with `ENV=local`,
-and it accepts requests only from this machine. To leave dev mode, remove `?dev=true` from the url.
+The loader does nothing unless the url has `?dev=true`. It works only on `localhost` / `127.0.0.1`,
+and on other hosts it just logs a warning. The e-dev API exists only when the app runs with `ENV=local`,
+and it accepts requests only from this machine. Dev mode stays on when you navigate: links,
+`redirect()` and `location.href = ...` get `?dev=true`.
 
-In dev mode:
+In dev mode (Alt is ⌥ Option on a Mac):
 
-- **Top bar** (press `/`): **Modify This Page**, **See Full Tree**, **Add New Page**, **Add New Template**,
-  **Edit CSS Variables**. Icon buttons next to it do the same, plus undo, redo and opening the file in the code editor.
-- **Modify This Page** opens `<body>` in the inspector. It walks the page model, not the rendered DOM, so templates
-  and `e-json` (which disappear after rendering) are reachable. Click children to go deeper, use ← / → for history.
-  - **Info**: code links, text, declared events and state (and the EHTML scoped state of the rendered element), move, delete
-  - **Attributes**: edit attributes (with suggestions from the catalog)
-  - **CSS**: inline style of the element, one declaration per line
-  - **Children**: the collapsible **subtree** (move, delete, open in code editor, add inside for every element; text nodes too),
-    a **preview** of the element with its subtree (rendered with the page's styles and EHTML), **Edit as HTML**
-    (the inner html is parsed back into the page model on save), and **Add element inside…**: a dialog with EHTML,
-    e-ui and HTML tabs (HTML has plain **Text** too). Search, pick a tile (suggested ones first for the context, like
-    `<option>` in `<select>` or fields in `e-form`), fill in attributes, preview it, and **Place inside**:
-    the dialogs close and the subtree shows the new element.
-- **See Full Tree**: every element of the page (head and body), collapsible, with a filter: open, add inside, delete, or go to the code of any element.
-- **Code links**: every element links to its line in the html file, its component source, and,
-  for `data-src` / `data-request-url`, the handler file of the endpoint (resolved from `web-app/routes.js`).
-  Links open in the editor from `ePages.editor` in `web-app/env/local.json` (`subl` by default, also `code`, `zed`),
-  through a local endpoint, so no `subl://` protocol handler is needed.
-- **Undo / Redo**: ⌘Z / ⌘⇧Z (Ctrl on Linux and Windows) or the buttons in the bar (last 50 changes are kept).
-- **Edit CSS Variables**: override e-ui variables (colors, fonts, spacing...) with a live preview (the editor UI follows them too).
-  They are saved in a marked `:root` block at the end of `web-app/static/css/app.css`.
-- New elements come with placeholder content (a card with a title and text, a sidebar with links and a ⇧S toggle,
-  a dialog with a close icon and buttons...) and icons where components need them.
-- Scripts of e-ui components (like `#e-ui/e-sidebar.js`) are imported automatically, from the elements themselves
-  (also when written with "Edit as HTML"):
-  - in the page where they are added;
-  - for templates (no `<head>`): in every page that shows the template with `e-wrapper` / `e-html`, and in the
-    template preview in dev mode;
-  - a page opened in dev mode gets imports it misses (for example, of components in its templates).
-- Links keep `?dev=true` when you navigate.
+| Keys | What happens |
+|---|---|
+| **Alt + hover** | Outlines the element under the pointer, at any depth (also in modal dialogs, iframes and elements created by scripts), and shows how it appeared in the page, outermost first, one step per line (see below) |
+| **Alt + ↑ / ↓** | Selects the parent / goes back down (or to the first child) |
+| **Alt + ← / →** | Selects the previous / next sibling |
+| **Alt + click** | Opens the element at its line and column in the editor. Elements created by scripts open the element that generated them (`<template is="e-file-upload">`, `<input is="e-date">`...) or the one they stand for (a button of the `e-tabs` nav opens its `<e-tab>`), markdown opens its line in the `.md` file. |
+| **Alt + Enter** | The same for the selected element (disabled controls get no clicks) |
+| **Alt + Shift + click**, **Alt + Shift + Enter** | Pins the element in a panel |
+| **Esc** | Closes the panel |
+
+How an element appeared in the page, for example:
+
+```
+test.html:70 <e-json> (GET /health → 200)
+↳ mapToTemplate('#health-template')
+↳ test.html:76 <template#health-template>
+↳ test.html:77 <b>
+```
+
+and for the own content of an `e-wrapper` (it's written in the page, the wrapper only places it into the template):
+
+```
+index.html:33 <template is="e-wrapper"> (placed inside #content of html/templates/account-new.html)
+↳ index.html:38 <span is="e-badge">
+```
+
+- templates show what released them: the action of an element (`data-actions-on-response` of `e-json`...) or
+  an event (`onclick="mapToTemplate(...)"`), the call, and the request of the response;
+- `e-wrapper` shows whether the element came with the wrapped template (its request), or is the wrapper's own
+  content, placed into a slot of that template;
+- `e-for-each` shows the item.
+
+The panel shows, and opens in the editor:
+
+- **Rendered by**: the chain, with the item of `e-for-each`, the request of the response it was rendered from,
+  and files that `data-src` / `data-request-url` point to (templates, markdown, endpoint handlers resolved from
+  `web-app/routes.js`, or from `data-endpoint-handler` / `data-src-pattern` / `data-request-url-pattern` hints);
+- **Created by script**: the line of JS that created the element (e-ui components, your scripts);
+- **Related**: what generated parts stand for (the button of an `e-tabs` nav selects its `<e-tab>`, and back);
+- **Component**: where the custom element is defined (`customElements.define`);
+- **State**: EHTML state of the element, the state `mapToTemplate()` released it with, `internalState`;
+- **Request**: the request it was rendered from, with its response;
+- **Styles**: rules of the page stylesheets that apply to it (`[is="e-stack"]`, `[data-gap]`... in `e-ui.css`);
+- **Ancestors in the file**, and a tree of everything **Inside** it (⌖ pins an element, ↑ pins the parent).
+
+The outline, the chain and the panel are shown in the top layer, so they are above modal dialogs of the page.
+
+The editor is `eDev.editor` in `web-app/env/local.json`: `subl` (default), `code` or `zed`.
+It's started through a local endpoint, so you don't need a `subl://` protocol handler.
+From the console: `eDev.chainOf(element)`, `eDev.sourceOf(element)`, `eDev.pin(element)`.
 
 How it works:
 
-- Each page has a JSON model in `web-app/static/json/e-pages/`. Every change updates the model, then
-  the html file is generated from it (readable, formatted html, multi-line attributes kept).
-- If you edit the html file by hand (or the page has no model yet), e-pages re-imports it into the
-  model the next time you open it. Your edits are never overwritten. The file is reformatted only when
-  you change it through e-pages.
-- The dev server serves pages with `data-eid` attributes, so the editor knows which model element is
-  under the pointer. Files on disk don't have them.
-- All changes are sent with EHTML's `e-form`.
-- Elements from e-ui that need a script (like `e-toast`) get their `import` added to the page automatically.
-- The catalog of elements is in `web-app/static/js/e-pages/catalog/*.json`.
-- The editor UI is built from e-ui (`is="e-stack"`, `button[data-primary]`, `dialog[is="e-dialog"]`...):
-  `e-ui.css` is loaded into its shadow root. Its own CSS (`styles.js`) covers only the bar and page overlays,
-  with `data-ep` attributes, no classes. Pages follow the same rule: e-ui attributes instead of classes.
+- **Source locations.** In dev mode the server adds `data-e-src="<file>:<line>:<column>"` to every element:
+  - in the page (`/?dev=true`, `/html/...html?dev=true`);
+  - in html that the page fetches (`/html/...html` requested from a dev page, recognised by its referer).
+
+  Nothing else in the html changes, so lines match the files on disk (lines of inline scripts too),
+  and the files themselves are never changed.
+- **Rendered elements keep them.** EHTML clones templates, sets `innerHTML` or unwraps children, and it
+  keeps attributes that have no `${...}`. So every clone from `e-for-each` points to its line in the template.
+- **The chain.** Elements that render (templates, `e-html`, `e-json`...) remove themselves from the page.
+  `tracker.js` starts before EHTML and remembers where nodes came from:
+  - clones of `template.content` are linked to their template when they are made, wherever they are placed;
+  - other insertions (`e-html`, `e-markdown`, e-ui components that replace their template, unwrapping) are
+    seen by a MutationObserver (in open shadow roots too);
+  - nodes inserted while EHTML handles a response are linked to the request, requests to the element
+    that made them;
+  - `mapToTemplate()` / `releaseTemplate()` calls are linked to the action or event that made them (EHTML runs
+    actions with `new Function`, applied to their element);
+  - `createElement` / `innerHTML` / `customElements.define` remember the line of JS that called them;
+  - `e-markdown` output gets `<!-- e-src:<md file>:<line> -->` comments before each block.
+
+  The server adds the templates that the element is written inside of in its own file (`/e-dev/source-chain`).
+- **Pages don't need to be changed.** In dev mode, the `#e-dev/` import map entry and the loader are added
+  to the served html only.
+
+## Adding e-dev to an existing app
+
+For example, InstruxMusic (nodes + EHTML + e-ui, routes in `worker.js`):
+
+1. Copy the client and its API (InstruxMusic has this as `npm run e-dev:update`):
+   `web-app/static/js/e-dev/` → same path, `web-app/api/e-dev/` → e.g. `web-app/endpoint-handlers/e-dev/`.
+2. Register the endpoints in local environment only, before other endpoints:
+   ```js
+   const eDevApi = process.env.ENV === 'local'
+     ? (await import('#web-app/endpoint-handlers/e-dev/routes.js')).default(global.config)
+     : []
+   // api: [...eDevApi, endpoint(...), ...]
+   ```
+3. Describe the app in `package.json` (everything is optional, defaults fit this blueprint):
+   ```json
+   "e-dev": {
+     "routesFile": "web-app/worker.js",
+     "indexPage": "html/landing.html"
+   }
+   ```
+   The code editor is `eDev.editor` in `web-app/env/local.json` (`subl` by default).
+4. Open any page with `?dev=true`. Pages and templates must be under `web-app/static/html` and served from `/html/`.
+
+Notes:
+- The API accepts requests only from localhost. With older copies of nodes (without `remoteAddress`),
+  that works over HTTP/2, which browsers use for this https server.
 
 ## Deploy
 

@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #
-# Shadow-copies vendored libraries (nodes, ehtml, eui, e-pages) into this project.
+# Shadow-copies vendored libraries (nodes, ehtml, eui, e-dev) into this project.
 #
 #   scripts/vendor.sh <lib> remote [ref]          # download from GitHub (default ref: HEAD = default branch)
 #   scripts/vendor.sh <lib> local  [path]         # copy from a local checkout
 #   scripts/vendor.sh <lib> reverse [path]        # copy this project's copy back to a local checkout
 #
 # Local checkout paths default to ../<repo> and can be overridden with
-# NODES_PATH, EHTML_PATH, EUI_PATH, E_PAGES_PATH.
+# NODES_PATH, EHTML_PATH, EUI_PATH, E_DEV_PATH.
 #
 # Every successful remote/local update is recorded in vendor.lock.json.
 
@@ -45,16 +45,16 @@ case "$LIB" in
       "static/css/e-ui.css:web-app/static/css/e-ui.css"
     )
     ;;
-  e-pages)
-    REPO="Guseyn/e-pages"
-    LOCAL_DEFAULT="${E_PAGES_PATH:-../e-pages}"
+  e-dev)
+    REPO="Guseyn/e-dev"
+    LOCAL_DEFAULT="${E_DEV_PATH:-../e-dev}"
     MAPPINGS=(
-      "web-app/static/js/e-pages/:web-app/static/js/e-pages/"
-      "web-app/api/e-pages/:web-app/api/e-pages/"
+      "web-app/static/js/e-dev/:web-app/static/js/e-dev/"
+      "web-app/api/e-dev/:web-app/api/e-dev/"
     )
     ;;
   *)
-    die "Unknown library '$LIB'. Use one of: nodes, ehtml, eui, e-pages"
+    die "Unknown library '$LIB'. Use one of: nodes, ehtml, eui, e-dev"
     ;;
 esac
 

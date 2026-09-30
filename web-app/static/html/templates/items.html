@@ -1,0 +1,11 @@
+<div is="e-stack" data-gap="md">
+  <template is="e-for-each" data-list-to-iterate="${[{ name: 'Apples', count: 3 }, { name: 'Pears', count: 0 }]}" data-item-name="fruit">
+    <div is="e-row" data-gap="sm">
+      <strong data-text="${fruit.name}"></strong>
+      <template is="e-if" data-condition-to-display="${fruit.count > 0}">
+        <span is="e-badge" data-text="${fruit.count}"></span>
+      </template>
+    </div>
+  </template>
+  <e-html data-src="/html/templates/account.html"></e-html>
+</div>

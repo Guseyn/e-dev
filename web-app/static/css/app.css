@@ -7,8 +7,7 @@ body {
   color: var(--e-fg);
 }
 
-/* e-pages: css variables (edited in e-pages, "Edit CSS Variables") */
+/* Overrides of e-ui css variables */
 :root {
   --e-primary: #277767;
 }
-/* e-pages: end of css variables */

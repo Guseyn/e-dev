@@ -15,28 +15,107 @@
         "#ehtml/": "/js/ehtml/",
         "#ehtml/main": "/js/ehtml/main.js",
         "#e-ui/": "/js/e-ui/",
-        "#e-pages/": "/js/e-pages/"
+        "#e-dev/": "/js/e-dev/"
       }
     }
   </script>
   <script type="module">
     import '#ehtml/main'
-    import '#e-pages/loader.js'
+    import '#e-dev/loader.js'
     import '#e-ui/e-dialog.js'
+    import '#e-ui/e-file-upload-template.js'
+    import '#e-ui/e-date.js'
+    import '#e-ui/e-tab.js'
   </script>
 </head>
 <body>
   <main is="e-main" data-centralized>
     <section is="e-section" data-padding="2xl">
       <h1 is="e-h" data-font-family="typography">Test</h1>
+      <p is="e-p">Alt + click any element to open it in the code editor.</p>
     </section>
-    <span is="e-caption">Caption</span>
+
+    <section is="e-section" data-padding="lg">
+      <h2 is="e-h">e-for-each</h2>
+      <ul>
+        <template is="e-for-each" data-list-to-iterate="${['One', 'Two', 'Three']}" data-item-name="item">
+          <li data-text="${index}. ${item}"></li>
+        </template>
+      </ul>
+    </section>
+
+    <section is="e-section" data-padding="lg">
+      <h2 is="e-h">e-if</h2>
+      <template is="e-if" data-condition-to-display="${2 > 1}">
+        <p is="e-p">Shown, because 2 &gt; 1</p>
+      </template>
+    </section>
+
+    <section is="e-section" data-padding="lg">
+      <h2 is="e-h">e-html with templates inside</h2>
+      <e-html data-src="/html/templates/items.html"></e-html>
+    </section>
+
+    <section is="e-section" data-padding="lg">
+      <h2 is="e-h">Template mapped into a slot</h2>
+      <div id="slot"></div>
+      <template id="card-template" data-object-name="card" data-insert-into="#slot">
+        <div is="e-card"><strong data-text="${card.title}"></strong></div>
+      </template>
+      <button type="button" data-primary onclick="mapToTemplate('#card-template', { title: 'Mapped card' })">Map</button>
+    </section>
+
+    <section is="e-section" data-padding="lg">
+      <h2 is="e-h">e-json → mapToTemplate</h2>
+      <e-json
+        data-src="/health"
+        data-response-name="healthResponse"
+        data-actions-on-response="mapToTemplate('#health-template', healthResponse.body)">
+      </e-json>
+      <div id="health-slot"></div>
+      <template id="health-template" data-object-name="health" data-append-to="#health-slot">
+        <p is="e-p">Status: <b data-text="${health.status}"></b></p>
+      </template>
+    </section>
+
+    <section is="e-section" data-padding="lg">
+      <h2 is="e-h">e-markdown</h2>
+      <e-markdown data-src="/md/demo.md"></e-markdown>
+    </section>
+
+    <section is="e-section" data-padding="lg">
+      <h2 is="e-h">e-ui components</h2>
+      <form is="e-form">
+        <template is="e-file-upload" data-name="avatar" data-label-text="Photo" data-action-text="Click or drag a file here"></template>
+        <label>Date <input is="e-date" name="date" value="2026-03-15"></label>
+        <button type="button" data-primary data-request-url="/health" data-request-method="GET">Check health</button>
+      </form>
+      <e-tabs>
+        <e-tab data-title="Overview"><p is="e-p">Tab 1</p></e-tab>
+        <e-tab data-title="Settings"><p is="e-p">Tab 2</p></e-tab>
+        <template is="e-if" data-condition-to-display="${true}">
+          <e-tab data-title="Conditional"><p is="e-p">Tab 3</p></e-tab>
+        </template>
+      </e-tabs>
+      <e-tabs>
+        <template is="e-for-each" data-list-to-iterate="${['Monday', 'Tuesday']}" data-item-name="day">
+          <e-tab data-title="${day}">
+            <p is="e-p" data-text="${day}"></p>
+          </e-tab>
+        </template>
+      </e-tabs>
+    </section>
   </main>
-  <main is="e-main">
-    <dialog is="e-dialog" id="qwe" data-open-on-load="true">
-      <h3 is="e-h">Dialog</h3>
-      <p is="e-p">Content</p>
-    </dialog>
-  </main>
+  <dialog is="e-dialog" id="deep-dialog" data-open-on-load="true">
+    <h3 is="e-h">Dialog</h3>
+    <div is="e-stack" data-gap="sm">
+      <section>
+        <div is="e-row" data-gap="sm">
+          <p is="e-p">Deep <strong>nested <em>text</em></strong></p>
+          <button type="button" data-primary>Button</button>
+        </div>
+      </section>
+    </div>
+  </dialog>
 </body>
 </html>

@@ -31,9 +31,6 @@ web-app/.well-known/acme-challenge/*
 # Deploy configuration (server addresses, local key paths)
 deploy/*.conf
 
-# e-pages undo history
-web-app/static/json/e-pages/.history/
-
 # Misc tooling
 .env
 .env.*
