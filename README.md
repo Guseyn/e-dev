@@ -190,7 +190,19 @@ For example, InstruxMusic (nodes + EHTML + e-ui, routes in `worker.js`):
    }
    ```
    The code editor is `eDev.editor` in `web-app/env/local.json` (`subl` by default).
-4. Open any page with `?dev=true`. Pages and templates must be under `web-app/static/html` and served from `/html/`.
+   The same keys can go into `eDev` of the env config instead, which wins over `package.json`
+   (useful when one repo has several apps). An app in another folder, or one that serves a single
+   shell page for many urls, sets that too:
+   ```json
+   "eDev": {
+     "routesFile": "docs/web-app/worker.js",
+     "staticFolder": "docs/web-app/static",
+     "notFoundPage": "html/404.html",
+     "pageUrls": { "/docs": "html/docs.html" }
+   }
+   ```
+4. Open any page with `?dev=true`. Pages and templates must be under `<staticFolder>/html` and served from `/html/`
+   (or from a `pageUrls` prefix).
 
 Notes:
 - The API accepts requests only from localhost. With older copies of nodes (without `remoteAddress`),

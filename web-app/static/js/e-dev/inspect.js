@@ -18,7 +18,8 @@ import { interceptLinks } from '#e-dev/links.js'
 import { stylesOf } from '#e-dev/styles-of.js'
 
 const SRC_ATTRIBUTE = 'data-e-src'
-const HTML_PREFIX = 'web-app/static/html/'
+// The html folder of the static folder, whichever folder the app serves ("web-app/static/html/" by default)
+const HTML_PREFIX = /^(?:.*\/)?static\/html\//
 const ARROWS = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
 
 const chains = new Map() // src → Promise of the source chain from the server
@@ -364,7 +365,7 @@ function withTriggers(steps) {
 function shortFile(src) {
   const [, file, line] = /^(.+):(\d+):(\d+)$/.exec(src) || [null, src, '']
   let name = file
-  if (file.startsWith(HTML_PREFIX)) name = file.slice(HTML_PREFIX.length)
+  if (HTML_PREFIX.test(file)) name = file.replace(HTML_PREFIX, '')
   else if (file.startsWith('/')) name = file === '/' ? 'page' : file.slice(1)
   return line ? `${name}:${line}` : name
 }

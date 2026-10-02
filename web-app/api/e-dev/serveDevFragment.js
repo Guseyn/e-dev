@@ -1,7 +1,7 @@
 import fs from 'fs'
 
 import handler, { respondHTML } from './lib/respond.js'
-import { pageOfUrl, pageFile, relativeToProject } from './lib/paths.js'
+import { pageOfUrl, pageFile, notFoundFile, relativeToProject } from './lib/paths.js'
 import { annotateHTML } from './lib/annotate.js'
 
 /**
@@ -13,7 +13,7 @@ import { annotateHTML } from './lib/annotate.js'
 export default handler(({ stream, headers }) => {
   const page = pageOfUrl(String(headers[':path'] || ''))
   if (!page || !fs.existsSync(pageFile(page))) {
-    return respondHTML(stream, 404, fs.readFileSync('./web-app/static/html/404.html', 'utf-8'))
+    return respondHTML(stream, 404, fs.readFileSync(notFoundFile(), 'utf-8'))
   }
   const file = pageFile(page)
   const html = fs.readFileSync(file, 'utf-8')

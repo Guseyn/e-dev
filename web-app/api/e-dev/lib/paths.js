@@ -5,8 +5,15 @@ import settings from './settings.js'
 
 // All paths are resolved from the project root (the app always runs from there)
 export const PROJECT_ROOT = path.resolve('.')
-export const STATIC_DIR = path.resolve('web-app/static')
-export const HTML_DIR = path.join(STATIC_DIR, 'html')
+
+// Settings are read on every call: config is set by the time a request comes, not always on import
+function staticDir() {
+  return path.resolve(settings().staticFolder)
+}
+
+function htmlDir() {
+  return path.join(staticDir(), 'html')
+}
 
 // Own copy (not from nodes), so e-dev works with older copies of nodes too
 export function isInsideFolder(filePath, folder) {
@@ -21,9 +28,24 @@ export class PathError extends Error {
   }
 }
 
-/** Absolute path of the page html file (page ids are paths relative to web-app/static, like "html/blog/post.html") */
+/** Absolute path of the page html file (page ids are paths relative to staticFolder, like "html/blog/post.html") */
 export function pageFile(page) {
-  return path.join(STATIC_DIR, page)
+  return path.join(staticDir(), page)
+}
+
+/** Absolute path of the page served for unknown pages */
+export function notFoundFile() {
+  return pageFile(settings().notFoundPage)
+}
+
+/**
+ * Page that the app serves for every url under a prefix (settings: pageUrls), or null.
+ * @param {string} pathname
+ */
+export function pageOfShellUrl(pathname) {
+  const pageUrls = settings().pageUrls || {}
+  const prefix = Object.keys(pageUrls).find(prefix => pathname === prefix || pathname.startsWith(`${prefix.replace(/\/$/, '')}/`))
+  return prefix ? pageUrls[prefix] : null
 }
 
 /**
@@ -37,11 +59,15 @@ export function pageOfUrl(url) {
   if (pathname === '/' || pathname === '') {
     return settings().indexPage
   }
-  const file = defaultSrcMapper(STATIC_DIR, pathname)
-  if (!file || !isInsideFolder(file, HTML_DIR) || !file.endsWith('.html')) {
+  const shellPage = pageOfShellUrl(pathname)
+  if (shellPage) {
+    return shellPage
+  }
+  const file = defaultSrcMapper(staticDir(), pathname)
+  if (!file || !isInsideFolder(file, htmlDir()) || !file.endsWith('.html')) {
     return null
   }
-  return path.relative(STATIC_DIR, file).split(path.sep).join('/')
+  return path.relative(staticDir(), file).split(path.sep).join('/')
 }
 
 /**
@@ -60,8 +86,12 @@ export function fileOfUrl(url) {
   if (pathname === '/' || pathname === '') {
     return pageFile(settings().indexPage)
   }
-  const file = defaultSrcMapper(STATIC_DIR, pathname)
-  if (!file || !isInsideFolder(file, STATIC_DIR)) return null
+  const shellPage = pageOfShellUrl(pathname)
+  if (shellPage) {
+    return pageFile(shellPage)
+  }
+  const file = defaultSrcMapper(staticDir(), pathname)
+  if (!file || !isInsideFolder(file, staticDir())) return null
   return file
 }
 

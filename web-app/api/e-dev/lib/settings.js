@@ -8,8 +8,15 @@ import runtime from '#nodes/runtime.js'
 const DEFAULTS = {
   // File with endpoint(...) declarations and handler imports (data-src → handler file links)
   routesFile: 'web-app/routes.js',
+  // Folder that the app serves static files from (project-relative), with pages in its html/
+  staticFolder: 'web-app/static',
   // Page served at "/"
   indexPage: 'html/index.html',
+  // Page served for unknown pages (relative to staticFolder)
+  notFoundPage: 'html/404.html',
+  // Urls that the app serves one page for (a shell that routes on the client), like
+  // { "/docs": "html/docs.html" } for "/docs" and everything under "/docs/"
+  pageUrls: {},
   // Code editor that opens elements: subl, code or zed
   editor: 'subl'
 }
